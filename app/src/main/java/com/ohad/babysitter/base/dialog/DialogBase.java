@@ -23,7 +23,6 @@ public abstract class DialogBase extends AppCompatDialog implements DialogBaseIn
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         super.onCreate(savedInstanceState);
 
         mInterface = this;

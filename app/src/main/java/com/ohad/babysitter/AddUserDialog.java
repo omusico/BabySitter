@@ -21,6 +21,8 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
 
     public AddUserDialog(Context context, AddUserCallback callback) {
         super(context, R.style.DialogRTLTheme);
+        mContext = context;
+        mCallback = callback;
     }
 
     @Override

@@ -24,7 +24,10 @@
 
     <!--TODO: Grey-->
     <color name="grey">#a1a1a1</color>
+    <color name="grey_mdm">#c3c3c3</color>
     <color name="grey_light">#f5f5f5</color>
+    <color name="gray_darkest">#1c1c1c</color>
+    <color name="gray_dark">#4a4a4a</color>
 
     <!--TODO: Yellow-->
     <color name="yellow_lime">#cddc39</color>
