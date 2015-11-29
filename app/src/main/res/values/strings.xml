@@ -1,0 +1,24 @@
+<resources>
+
+    <string name="parse_app_id">lsRCDEr6UvvJybO7VCzL67d8bLirA9JQeT8c46iC</string>
+    <string name="parse_client_key">YHfIzvsAR8j4lQ6z4Dn82YYTfdelntuAQESlFgji</string>
+
+    <string name="app_name">BabySitter</string>
+
+    <!--TODO: Content Description-->
+    <string name="cd_back">Back Button</string>
+    <string name="cd_done">Done Button</string>
+
+    <!--TODO: Toolbar-->
+    <string name="action_settings">Settings</string>
+
+    <!--TODO: General-->
+    <string name="gen_add">Add</string>
+    <string name="gen_show">Show</string>
+    <string name="gen_done">Done</string>
+
+    <!--TODO: Main Screen-->
+    <string name="user_item_button_text">See Information</string>
+    <string name="main_title">Find your baby sitter</string>
+
+</resources>

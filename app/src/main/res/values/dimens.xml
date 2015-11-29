@@ -1,0 +1,42 @@
+<resources>
+
+    <!--TODO: Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--TODO: Margin/Padding-->
+    <dimen name="margin_baseX05">3dp</dimen>
+    <dimen name="margin_baseX1">6dp</dimen>
+    <dimen name="margin_baseX2">12dp</dimen>
+    <dimen name="margin_baseX3">18dp</dimen>
+    <dimen name="margin_baseX5">30dp</dimen>
+    <dimen name="margin_baseX6">36dp</dimen>
+    <dimen name="margin_baseX7">42dp</dimen>
+    <dimen name="margin_baseX8">48dp</dimen>
+    <dimen name="margin_baseX9">54dp</dimen>
+    <dimen name="margin_baseX10">60dp</dimen>
+    <dimen name="margin_baseX12">72dp</dimen>
+    <dimen name="margin_baseX13">78dp</dimen>
+    <dimen name="margin_baseX15">90dp</dimen>
+    <dimen name="margin_baseX17">102dp</dimen>
+    <dimen name="margin_baseX20">120dp</dimen>
+    <dimen name="margin_baseX24">144dp</dimen>
+    <dimen name="margin_baseX40">240dp</dimen>
+    <dimen name="margin_baseX50">300dp</dimen>
+    <dimen name="margin_baseX60">360dp</dimen>
+
+    <!--TODO: Text Sizes-->
+    <dimen name="text_size_xxxl">24sp</dimen>
+    <dimen name="text_size_xxl">22sp</dimen>
+    <dimen name="text_size_xl">20sp</dimen>
+    <dimen name="text_size_l">18sp</dimen>
+    <dimen name="text_size_m">16sp</dimen>
+    <dimen name="text_size_s">14sp</dimen>
+    <dimen name="text_size_xs">12sp</dimen>
+
+    <!--TODO: Other-->
+    <dimen name="main_listview_divider_height">50dp</dimen>
+    <dimen name="circular_images_size">50dp</dimen>
+    <dimen name="add_image_size">80dp</dimen>
+
+</resources>
