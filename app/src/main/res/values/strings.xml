@@ -20,5 +20,17 @@
     <!--TODO: Main Screen-->
     <string name="user_item_button_text">See Information</string>
     <string name="main_title">Find your baby sitter</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_age">Age</string>
+    <string name="hint_phone">Phone</string>
+    <string name="hint_salary">Salary</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_city">City</string>
+    <string name="hint_about">Something about yourself</string>
+    <string name="intent_media_title">Choose Image Source</string>
+    <string name="gen_galleery">Gallery</string>
+    <string name="gen_camera">Camera</string>
+    <string name="intent_media_gallery_title">Choose a Picture</string>
 
 </resources>

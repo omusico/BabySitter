@@ -16,7 +16,8 @@
         android:layout_below="@+id/include"
         android:background="@color/grey_mdm">
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white">
@@ -32,7 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/fn_editText"
-                android:hint="First Name"
+                android:hint="@string/hint_first_name"
+                android:inputType="text"
                 android:background="@color/transparent"
                 android:padding="@dimen/margin_baseX2"
                 android:drawableLeft="@drawable/ic_account_circle"
@@ -40,16 +42,14 @@
                 android:drawablePadding="@dimen/margin_baseX2"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black_text"
-                android:textSize="@dimen/text_size_s"
-                android:layout_below="@+id/civProfileImage"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:textSize="@dimen/text_size_s" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/ln_editText"
-                android:hint="Last Name"
+                android:hint="@string/hint_last_name"
+                android:inputType="text"
                 android:background="@color/transparent"
                 android:padding="@dimen/margin_baseX2"
                 android:drawableLeft="@drawable/ic_group"
@@ -57,33 +57,14 @@
                 android:drawablePadding="@dimen/margin_baseX2"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black_text"
-                android:textSize="@dimen/text_size_s"
-                android:layout_below="@+id/fn_editText"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/age_editText"
-                android:hint="Age"
-                android:background="@color/transparent"
-                android:padding="@dimen/margin_baseX2"
-                android:drawableLeft="@drawable/ic_account_circle"
-                android:drawableStart="@drawable/ic_account_circle"
-                android:drawablePadding="@dimen/margin_baseX2"
-                android:textColorHint="@color/grey"
-                android:textColor="@color/black_text"
-                android:textSize="@dimen/text_size_s"
-                android:layout_below="@+id/ln_editText"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:textSize="@dimen/text_size_s" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/city_editText"
-                android:hint="City"
+                android:hint="@string/hint_city"
+                android:inputType="text"
                 android:background="@color/transparent"
                 android:padding="@dimen/margin_baseX2"
                 android:drawableLeft="@drawable/ic_account_circle"
@@ -91,12 +72,85 @@
                 android:drawablePadding="@dimen/margin_baseX2"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black_text"
-                android:textSize="@dimen/text_size_s"
-                android:layout_below="@+id/age_editText"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:textSize="@dimen/text_size_s" />
 
-        </RelativeLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/age_editText"
+                android:hint="@string/hint_age"
+                android:inputType="number"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_baseX2"
+                android:drawableLeft="@drawable/ic_account_circle"
+                android:drawableStart="@drawable/ic_account_circle"
+                android:drawablePadding="@dimen/margin_baseX2"
+                android:textColorHint="@color/grey"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/text_size_s"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/phone_editText"
+                android:hint="@string/hint_phone"
+                android:inputType="phone"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_baseX2"
+                android:drawableLeft="@drawable/ic_account_circle"
+                android:drawableStart="@drawable/ic_account_circle"
+                android:drawablePadding="@dimen/margin_baseX2"
+                android:textColorHint="@color/grey"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/text_size_s" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/salary_editText"
+                android:hint="@string/hint_salary"
+                android:inputType="number"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_baseX2"
+                android:drawableLeft="@drawable/ic_account_circle"
+                android:drawableStart="@drawable/ic_account_circle"
+                android:drawablePadding="@dimen/margin_baseX2"
+                android:textColorHint="@color/grey"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/text_size_s" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/email_editText"
+                android:hint="@string/hint_email"
+                android:inputType="textEmailAddress"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_baseX2"
+                android:drawableLeft="@drawable/ic_account_circle"
+                android:drawableStart="@drawable/ic_account_circle"
+                android:drawablePadding="@dimen/margin_baseX2"
+                android:textColorHint="@color/grey"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/text_size_s" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:id="@+id/about_editText"
+                android:hint="@string/hint_about"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_baseX2"
+                android:drawableLeft="@drawable/ic_account_circle"
+                android:drawableStart="@drawable/ic_account_circle"
+                android:drawablePadding="@dimen/margin_baseX2"
+                android:textColorHint="@color/grey"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/text_size_s" />
+
+        </LinearLayout>
+
     </ScrollView>
 
 

@@ -1,4 +1,4 @@
-package com.ohad.babysitter;
+package com.ohad.babysitter.main;
 
 import android.content.Context;
 import android.view.View;
@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.ohad.babysitter.R;
+import com.ohad.babysitter.pojo.UserPojo;
 
 import java.util.List;
 

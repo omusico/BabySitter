@@ -1,10 +1,14 @@
-package com.ohad.babysitter;
+package com.ohad.babysitter.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.ohad.babysitter.utility.Utility;
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by Ohad on 26/11/2015.
@@ -23,6 +27,10 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
     public static final String KEY_PROFILE_IMAGE_COLUMN = "profile_image";
     public static final String KEY_BIRTHDAY_COLUMN = "birthday";
     public static final String KEY_AGE_COLUMN = "age";
+    public static final String KEY_ABOUT_COLUMN = "about";
+    public static final String KEY_SALARY_COLUMN = "salary";
+    public static final String KEY_EMAIL_COLUMN = "email";
+    public static final String KEY_PICTURE_COLUMN = "picture_file";
 
     private String id;
     private String firstName;
@@ -30,32 +38,18 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
     private String profilePictureUrl;
     private String city;
     private String phone;
-    private String text;
+    private String about;
     private String birthday;
+    private String email;
     private int age;
+    private int salary;
 
 
     // Mark: Constructors
 
-    public UserPojo(String firstName, String lastName, String profilePictureUrl, String about, String phone, String birthday, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.profilePictureUrl = profilePictureUrl;
-        this.city = about;
-        this.phone = phone;
-        this.birthday = birthday;
-        this.age = age;
-    }
-
-    public UserPojo(String firstName, String lastName, String birthday, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.age = age;
-    }
 
     public UserPojo() {
-        super();
+        super(KEY_CLASS_NAME);
     }
 
     public UserPojo(String theClassName) {
@@ -67,11 +61,17 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
         this.id = parseObject.getObjectId();
         this.firstName = parseObject.getString(KEY_FIRST_NAME_COLUMN);
         this.lastName = parseObject.getString(KEY_LAST_NAME_COLUMN);
-        this.profilePictureUrl = parseObject.getString(KEY_PROFILE_IMAGE_COLUMN);
+        //this.profilePictureUrl = parseObject.getString(KEY_PROFILE_IMAGE_COLUMN);
         this.city = parseObject.getString(KEY_CITY_COLUMN);
         this.phone = parseObject.getString(KEY_PHONE_COLUMN);
         this.birthday = parseObject.getString(KEY_BIRTHDAY_COLUMN);
         this.age = parseObject.getInt(KEY_AGE_COLUMN);
+        this.email = parseObject.getString(KEY_EMAIL_COLUMN);
+        this.salary = parseObject.getInt(KEY_SALARY_COLUMN);
+
+        final ParseFile parseFile = parseObject.getParseFile(KEY_PICTURE_COLUMN);
+        this.profilePictureUrl = parseFile.getUrl();
+
     }
 
     // Mark: Setters/Getters
@@ -124,6 +124,10 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
         this.age = age;
     }
 
+    public void setAge(String age) {
+        this.age = StringUtils.isNumeric(age) ? Integer.parseInt(age) : 0;
+    }
+
     public String getFullname(){
         return firstName + " " + lastName;
     }
@@ -133,7 +137,7 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = Utility.isValidPhoneNumber(phone) ? phone : "X";
     }
 
     public String getId() {
@@ -144,12 +148,32 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getAbout() {
+        return about;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = StringUtils.isNumeric(salary) ? Integer.valueOf(salary) : 0;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = Utility.isEmailValid(email) ? email : "X";
     }
 
     // Mark: Other
@@ -157,25 +181,33 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
     @Override
     public String toString() {
         return "UserPojo{" +
-                "firstName='" + firstName + '\'' +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", profilePictureUrl='" + profilePictureUrl + '\'' +
                 ", city='" + city + '\'' +
-                ", birthday=" + birthday +
+                ", phone='" + phone + '\'' +
+                ", about='" + about + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", email='" + email + '\'' +
                 ", age=" + age +
+                ", salary=" + salary +
                 '}';
     }
 
     public void saveToParse(){
-        put(UserPojo.KEY_FIRST_NAME_COLUMN, firstName);
-        this.put(UserPojo.KEY_LAST_NAME_COLUMN, lastName);
-        this.put(UserPojo.KEY_FULL_NAME_COLUMN, getFullname());
-        this.put(UserPojo.KEY_PHONE_COLUMN, phone);
-        this.put(UserPojo.KEY_BIRTHDAY_COLUMN, birthday);
-        this.put(UserPojo.KEY_AGE_COLUMN, age);
-        this.put(UserPojo.KEY_CITY_COLUMN, city);
-        this.put(UserPojo.KEY_PROFILE_IMAGE_COLUMN, profilePictureUrl);
-        this.saveInBackground();
+        put(UserPojo.KEY_FIRST_NAME_COLUMN, firstName == null ? "" : firstName);
+        put(UserPojo.KEY_LAST_NAME_COLUMN, lastName == null ? "" : lastName);
+        put(UserPojo.KEY_FULL_NAME_COLUMN, getFullname() == null ? "" : getFullname());
+        put(UserPojo.KEY_PHONE_COLUMN, phone == null ? "" : phone);
+        put(UserPojo.KEY_BIRTHDAY_COLUMN, birthday == null ? "" : birthday);
+        put(UserPojo.KEY_AGE_COLUMN, age);
+        put(UserPojo.KEY_CITY_COLUMN, city == null ? "" : city);
+        put(UserPojo.KEY_PROFILE_IMAGE_COLUMN, profilePictureUrl == null ? "" : profilePictureUrl);
+        put(UserPojo.KEY_ABOUT_COLUMN, about == null ? "" : about);
+        put(UserPojo.KEY_EMAIL_COLUMN, email == null ? "" : email);
+        put(UserPojo.KEY_SALARY_COLUMN, salary);
+        saveInBackground();
     }
 
     // Mark: Parcelable
@@ -193,9 +225,11 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
         dest.writeString(this.profilePictureUrl);
         dest.writeString(this.city);
         dest.writeString(this.phone);
-        dest.writeString(this.text);
+        dest.writeString(this.about);
         dest.writeString(this.birthday);
+        dest.writeString(this.email);
         dest.writeInt(this.age);
+        dest.writeInt(this.salary);
     }
 
     protected UserPojo(Parcel in) {
@@ -205,9 +239,11 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
         this.profilePictureUrl = in.readString();
         this.city = in.readString();
         this.phone = in.readString();
-        this.text = in.readString();
+        this.about = in.readString();
         this.birthday = in.readString();
+        this.email = in.readString();
         this.age = in.readInt();
+        this.salary = in.readInt();
     }
 
     public static final Creator<UserPojo> CREATOR = new Creator<UserPojo>() {

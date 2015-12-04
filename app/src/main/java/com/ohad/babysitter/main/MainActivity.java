@@ -1,19 +1,25 @@
-package com.ohad.babysitter;
+package com.ohad.babysitter.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.ohad.babysitter.R;
 import com.ohad.babysitter.base.activity.ActivityBase;
+import com.ohad.babysitter.pojo.UserPojo;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ui.ParseLoginBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends ActivityBase implements AddUserDialog.AddUserCallback {
@@ -21,16 +27,21 @@ public class MainActivity extends ActivityBase implements AddUserDialog.AddUserC
     private ListView mListView;
     private List<UserPojo> mUsers;
     private UserAdapter mAdapter;
+    private AddUserDialog mAddUserDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initList();
+        refresh();
+    }
 
+    private void refresh() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(UserPojo.KEY_CLASS_NAME);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
+                mUsers.clear();
                 for (int i = 0; i < objects.size(); i++) {
                     ParseObject parseObject = objects.get(i);
                     UserPojo userPojo = new UserPojo(parseObject);
@@ -39,24 +50,6 @@ public class MainActivity extends ActivityBase implements AddUserDialog.AddUserC
                 }
             }
         });
-
-
-
-        /*final UserPojo userPojo = new UserPojo(UserPojo.KEY_CLASS_NAME);
-        userPojo.put(UserPojo.KEY_FIRST_NAME_COLUMN, "ohad");
-        userPojo.put(UserPojo.KEY_LAST_NAME_COLUMN, "shiffer");
-        userPojo.put(UserPojo.KEY_FULL_NAME_COLUMN, "ohad shiffer");
-        userPojo.put(UserPojo.KEY_PHONE_COLUMN, "054-2571392");
-        userPojo.put(UserPojo.KEY_BIRTHDAY_COLUMN, "1000005735");
-        userPojo.put(UserPojo.KEY_AGE_COLUMN, 28);
-        userPojo.put(UserPojo.KEY_CITY_COLUMN, "maale shomron");
-        userPojo.put(UserPojo.KEY_PROFILE_IMAGE_COLUMN, "http://static3.bigstockphoto.com/thumbs/5/1/3/large2/3153618.jpg");
-        userPojo.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-            }
-        });*/
-
     }
 
     @Override
@@ -89,12 +82,28 @@ public class MainActivity extends ActivityBase implements AddUserDialog.AddUserC
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
 
-            case R.id.action_more: //----------------------------------More
-
+            case R.id.action_more: //----------------------------------> More
+                ParseLoginBuilder builder = new ParseLoginBuilder(this);
+                Intent parseLoginIntent = builder.setAppLogo(R.drawable.login_logo)
+                        .setParseLoginEnabled(true)
+                        .setParseLoginButtonText("Go")
+                        .setParseSignupButtonText("Register")
+                        .setParseLoginHelpText("Forgot password?")
+                        .setParseLoginInvalidCredentialsToastText("You email and/or password is not correct")
+                        .setParseLoginEmailAsUsername(true)
+                        .setParseSignupSubmitButtonText("Submit registration")
+                        .setFacebookLoginEnabled(true)
+                        .setFacebookLoginButtonText("Facebook")
+                        .setFacebookLoginPermissions(Arrays.asList("public_profile", "user_friends"))
+                        .setTwitterLoginEnabled(true)
+                        .setTwitterLoginButtontext("Twitter")
+                        .build();
+                startActivityForResult(parseLoginIntent, 0);
                 break;
 
-            case R.id.action_add: //-----------------------------------Add
-                new AddUserDialog(this, this).show();
+            case R.id.action_add: //-----------------------------------> Add
+                mAddUserDialog = new AddUserDialog(this, this);
+                mAddUserDialog.show();
                 break;
         }
 
@@ -103,8 +112,19 @@ public class MainActivity extends ActivityBase implements AddUserDialog.AddUserC
 
     @Override
     public void onAddUserCallbackResult(UserPojo userPojo) {
-        mUsers.add(userPojo);
-        mAdapter.notifyDataSetChanged();
+        try {
+            userPojo.saveToParse();
+            mUsers.add(0, userPojo);
+            mAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            Toast.makeText(this, "Cannot create ad. Reason:\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mAddUserDialog.onActivityResult(requestCode, resultCode, data);
+    }
 }
