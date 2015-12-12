@@ -23,7 +23,6 @@ import com.ohad.babysitter.utility.Utility;
 import com.parse.ParseFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -185,7 +184,7 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
 
                         mCompressedBitmap = Utility.decodeFile(file, 150);
                         mImageParseFile = new ParseFile(file);
-                        mImageParseFile = Utility.uploadParseFile(mContext, mCompressedBitmap, fileNamePostfix);
+                        mImageParseFile = Utility.uploadParseFile(mCompressedBitmap, fileNamePostfix);
 
                     } catch (Exception e) {
                         e.printStackTrace();

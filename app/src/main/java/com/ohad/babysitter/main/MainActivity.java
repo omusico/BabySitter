@@ -16,10 +16,9 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ui.ParseLoginBuilder;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends ActivityBase implements AddUserDialog.AddUserCallback {
@@ -38,6 +37,8 @@ public class MainActivity extends ActivityBase implements AddUserDialog.AddUserC
 
     private void refresh() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(UserPojo.KEY_CLASS_NAME);
+        //query.whereLessThan("age", 50);
+        //query.whereGreaterThan("age", 20);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
@@ -82,11 +83,17 @@ public class MainActivity extends ActivityBase implements AddUserDialog.AddUserC
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
 
-            case R.id.action_more: //----------------------------------> More
-
+            case R.id.action_profile:
+                // TODO: 12/12/2015 start profile activity
                 break;
 
-            case R.id.action_add: //-----------------------------------> Add
+            case R.id.action_logout: //----------------------------------> Logout
+                ParseUser.logOut();
+                startActivity(new Intent(this, SplashActivity.class));
+                finish();
+                break;
+
+            case R.id.action_add: //-------------------------------------> Add
                 mAddUserDialog = new AddUserDialog(this, this);
                 mAddUserDialog.show();
                 break;

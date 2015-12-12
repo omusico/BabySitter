@@ -1,18 +1,21 @@
 package com.ohad.babysitter.utility;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
-import android.widget.Toast;
+import android.util.Log;
 
+import com.ohad.babysitter.R;
 import com.parse.ParseFile;
-import com.parse.ParseObject;
+import com.parse.ui.ParseLoginBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +24,26 @@ import java.util.regex.Pattern;
  * Helpful static methods.
  */
 public class Utility {
+
+
+
+
+    // TODO Mark: Log
+
+    private static String TAG = "ohad";
+
+    public static void e(String where, String message) {
+        Log.e(TAG, "Error in: " + where + " Reason: " + message);
+    }
+
+    public static void d(String message) {
+        Log.d(TAG, message);
+    }
+
+
+
+
+    // TODO Mark: Validation
 
     /**
      * method is used for checking valid phone format.
@@ -47,35 +70,10 @@ public class Utility {
         return isValid;
     }
 
-    public static ParseFile uploadParseFile(Context context, Bitmap bitmap, String name) {
-        // Convert it to byte
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        // Compress image to lower quality scale 1 - 100
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] image = stream.toByteArray();
 
-        // Create the ParseFile
-        ParseFile file = new ParseFile("baby_sitter_" + name + ".png", image);
-        // Upload the image into Parse Cloud
-        //file.saveInBackground();
 
-        // Create a New Class called "ImageUpload" in Parse
-        //ParseObject imgupload = new ParseObject("ImageUpload");
 
-        // Create a column named "ImageName" and set the string
-        //imgupload.put("ImageName", "AndroidBegin Logo");
-
-        // Create a column named "ImageFile" and insert the image
-        //imgupload.put("ImageFile", file);
-
-        // Create the class and the columns
-        //imgupload.saveInBackground();
-
-        // Show a simple toast message
-        //Toast.makeText(context, "Image Uploaded", Toast.LENGTH_SHORT).show();
-
-        return file;
-    }
+    // TODO Mark: Files
 
     /**
      * @param f the image file which you want to rescale.
@@ -104,10 +102,49 @@ public class Utility {
             //decode with inSampleSize
             BitmapFactory.Options o2 = new BitmapFactory.Options();
             o2.inSampleSize = scale;
+            d("decodeFile size = " + scale);
             return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
-        } catch (FileNotFoundException e) {}
+        } catch (FileNotFoundException e) {
+            e("utility-decodeFile", e.getMessage());
+        }
         return null;
     }
+
+
+
+
+    // TODO Mark: Parse API
+
+    public static Intent getLoginIntent(Context context) {
+        ParseLoginBuilder builder = new ParseLoginBuilder(context);
+
+        return builder.setAppLogo(R.drawable.login_logo)
+                .setParseLoginEnabled(true)
+                .setParseLoginButtonText(context.getString(R.string.login_go))
+                .setParseSignupButtonText(context.getString(R.string.login_register))
+                .setParseLoginHelpText(context.getString(R.string.login_forgot_pass))
+                .setParseLoginInvalidCredentialsToastText(context.getString(R.string.login_invalid_details))
+                .setParseLoginEmailAsUsername(true)
+                .setParseSignupSubmitButtonText(context.getString(R.string.login_submit_reg))
+                .setFacebookLoginEnabled(true)
+                .setFacebookLoginButtonText(context.getString(R.string.login_facebook))
+                .setFacebookLoginPermissions(Arrays.asList("public_profile", "user_friends"))
+                .setTwitterLoginEnabled(true)
+                .setTwitterLoginButtontext(context.getString(R.string.login_twitter))
+                .build();
+    }
+
+    public static ParseFile uploadParseFile(Bitmap bitmap, String name) {
+        // Convert it to byte
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        // Compress image to lower quality scale 1 - 100
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] image = stream.toByteArray();
+
+        return new ParseFile("baby_sitter_" + name + ".png", image);
+    }
+
+
 
 }
 

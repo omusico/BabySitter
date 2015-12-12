@@ -44,5 +44,7 @@
     <string name="add_ad_invalid_city">You must enter city!</string>
     <string name="add_ad_invalid_age">You must enter age!</string>
     <string name="add_ad_invalid_phone">You must enter phone!</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_profile">Profile</string>
 
 </resources>

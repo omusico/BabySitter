@@ -8,9 +8,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.ohad.babysitter.R;
-import com.parse.ui.ParseLoginBuilder;
-
-import java.util.Arrays;
+import com.ohad.babysitter.utility.Utility;
+import com.parse.ParseAnonymousUtils;
+import com.parse.ParseUser;
 
 /**
  * Created by Ohad on 04/12/2015.
@@ -18,8 +18,7 @@ import java.util.Arrays;
  */
 public class SplashActivity extends AppCompatActivity {
 
-    private static String TAG = SplashActivity.class.getName();
-    private static long SLEEP_TIME = 2;
+    private String TAG = SplashActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +29,17 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.splash);
 
-        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-        SplashActivity.this.startActivity(intent);
-//        IntentLauncher launcher = new IntentLauncher();
-//        launcher.start();
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+        if (currentUser != null) {
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            SplashActivity.this.startActivity(intent);
+            finish();
+        } else {
+            IntentLauncher launcher = new IntentLauncher();
+            launcher.start();
+        }
+
     }
 
     private class IntentLauncher extends Thread {
@@ -44,26 +50,13 @@ public class SplashActivity extends AppCompatActivity {
         public void run() {
             try {
                 // Sleeping
+                short SLEEP_TIME = 1;
                 Thread.sleep(SLEEP_TIME * 1000);
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
             }
 
-            ParseLoginBuilder builder = new ParseLoginBuilder(SplashActivity.this);
-            Intent parseLoginIntent = builder.setAppLogo(R.drawable.login_logo)
-                    .setParseLoginEnabled(true)
-                    .setParseLoginButtonText(getString(R.string.login_go))
-                    .setParseSignupButtonText(getString(R.string.login_register))
-                    .setParseLoginHelpText(getString(R.string.login_forgot_pass))
-                    .setParseLoginInvalidCredentialsToastText(getString(R.string.login_invalid_details))
-                    .setParseLoginEmailAsUsername(true)
-                    .setParseSignupSubmitButtonText(getString(R.string.login_submit_reg))
-                    .setFacebookLoginEnabled(true)
-                    .setFacebookLoginButtonText(getString(R.string.login_facebook))
-                    .setFacebookLoginPermissions(Arrays.asList("public_profile", "user_friends"))
-                    .setTwitterLoginEnabled(true)
-                    .setTwitterLoginButtontext(getString(R.string.login_twitter))
-                    .build();
+            Intent parseLoginIntent = Utility.getLoginIntent(SplashActivity.this);
             startActivityForResult(parseLoginIntent, 0);
 
         }
