@@ -18,10 +18,13 @@ import android.widget.Toast;
 import com.ohad.babysitter.R;
 import com.ohad.babysitter.base.dialog.DialogBase;
 import com.ohad.babysitter.pojo.UserPojo;
+import com.ohad.babysitter.utility.RealPathUtil;
 import com.ohad.babysitter.utility.Utility;
 import com.parse.ParseFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,6 +39,7 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
     private AddUserCallback mCallback;
     private Context mContext;
     private ParseFile mImageParseFile;
+    private Bitmap mCompressedBitmap;
 
 
     public interface AddUserCallback {
@@ -99,6 +103,8 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
                     userPojo.setSalary(mEtSalary.getText().toString());
                     userPojo.setEmail(mEtEmail.getText().toString());
                     userPojo.setBirthday("7/9/1988");
+                    userPojo.setBitmap(mCompressedBitmap);
+                    //userPojo.setProfilePictureUrl(mImageParseFile.getUrl());
                     userPojo.put(UserPojo.KEY_PICTURE_COLUMN, mImageParseFile);
                     mCallback.onAddUserCallbackResult(userPojo);
                     dismiss();
@@ -145,19 +151,19 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
 
     private boolean checkValidation() {
         if (mEtFirstName.getText().toString().isEmpty()) {
-            Toast.makeText(mContext, "You must enter first name!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, R.string.add_ad_invalid_first_name, Toast.LENGTH_SHORT).show();
             return false;
         } else if (mEtLastName.getText().toString().isEmpty()) {
-            Toast.makeText(mContext, "You must enter last name!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, R.string.add_ad_invalid_last_name, Toast.LENGTH_SHORT).show();
             return false;
         } else if (mEtCity.getText().toString().isEmpty()) {
-            Toast.makeText(mContext, "You must enter city!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, R.string.add_ad_invalid_city, Toast.LENGTH_SHORT).show();
             return false;
         } else if (mEtAge.getText().toString().isEmpty()) {
-            Toast.makeText(mContext, "You must enter age!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, R.string.add_ad_invalid_age, Toast.LENGTH_SHORT).show();
             return false;
         } else if (mEtPhone.getText().toString().isEmpty()) {
-            Toast.makeText(mContext, "You must enter phone!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, R.string.add_ad_invalid_phone, Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -165,6 +171,7 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
+            final String fileNamePostfix = String.valueOf(Calendar.getInstance().getTimeInMillis());
 
             Uri imageUri = data.getData();
             mCivProfile.setImageURI(imageUri);
@@ -172,9 +179,15 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
             switch (requestCode) {
                 case ACTION_REQUEST_GALLERY:
                     try {
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), imageUri);
-                        mImageParseFile = Utility.uploadParseFile(mContext, bitmap);
-                    } catch (IOException e) {
+                        //Bitmap bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), imageUri);
+
+                        File file = new File(RealPathUtil.getRealPathFromURI(mContext, imageUri));
+
+                        mCompressedBitmap = Utility.decodeFile(file, 150);
+                        mImageParseFile = new ParseFile(file);
+                        mImageParseFile = Utility.uploadParseFile(mContext, mCompressedBitmap, fileNamePostfix);
+
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
@@ -186,6 +199,8 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
 
         }
     }
+
+
 
 }
 

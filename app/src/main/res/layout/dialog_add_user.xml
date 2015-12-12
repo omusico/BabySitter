@@ -14,7 +14,7 @@
         android:id="@+id/scrollView"
         android:padding="@dimen/margin_baseX2"
         android:layout_below="@+id/include"
-        android:background="@color/grey_mdm">
+        android:fillViewport="false">
 
         <LinearLayout
             android:orientation="vertical"
@@ -22,42 +22,50 @@
             android:layout_height="wrap_content"
             android:background="@color/white">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/civProfileImage"
-                android:layout_margin="@dimen/margin_baseX3"
-                android:src="@drawable/ic_add_image_50dp"
-                android:layout_width="@dimen/add_image_size"
-                android:layout_height="@dimen/add_image_size" />
-
-            <EditText
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/fn_editText"
-                android:hint="@string/hint_first_name"
-                android:inputType="text"
-                android:background="@color/transparent"
-                android:padding="@dimen/margin_baseX2"
-                android:drawableLeft="@drawable/ic_account_circle"
-                android:drawableStart="@drawable/ic_account_circle"
-                android:drawablePadding="@dimen/margin_baseX2"
-                android:textColorHint="@color/grey"
-                android:textColor="@color/black_text"
-                android:textSize="@dimen/text_size_s" />
+                android:layout_height="match_parent">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/ln_editText"
-                android:hint="@string/hint_last_name"
-                android:inputType="text"
-                android:background="@color/transparent"
-                android:padding="@dimen/margin_baseX2"
-                android:drawableLeft="@drawable/ic_group"
-                android:drawableStart="@drawable/ic_group"
-                android:drawablePadding="@dimen/margin_baseX2"
-                android:textColorHint="@color/grey"
-                android:textColor="@color/black_text"
-                android:textSize="@dimen/text_size_s" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/civProfileImage"
+                    android:layout_margin="@dimen/margin_baseX3"
+                    android:src="@drawable/ic_add_image_50dp"
+                    android:layout_width="@dimen/add_image_size"
+                    android:layout_height="@dimen/add_image_size" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fn_editText"
+                    android:hint="@string/hint_first_name"
+                    android:inputType="text"
+                    android:background="@color/transparent"
+                    android:padding="@dimen/margin_baseX2"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/text_size_s"
+                    android:layout_alignTop="@+id/civProfileImage"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toRightOf="@+id/civProfileImage"
+                    android:layout_toEndOf="@+id/civProfileImage" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ln_editText"
+                    android:hint="@string/hint_last_name"
+                    android:inputType="text"
+                    android:background="@color/transparent"
+                    android:padding="@dimen/margin_baseX2"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/text_size_s"
+                    android:layout_below="@+id/fn_editText"
+                    android:layout_alignLeft="@+id/fn_editText"
+                    android:layout_alignStart="@+id/fn_editText" />
+
+            </RelativeLayout>
 
             <EditText
                 android:layout_width="match_parent"
@@ -67,9 +75,6 @@
                 android:inputType="text"
                 android:background="@color/transparent"
                 android:padding="@dimen/margin_baseX2"
-                android:drawableLeft="@drawable/ic_account_circle"
-                android:drawableStart="@drawable/ic_account_circle"
-                android:drawablePadding="@dimen/margin_baseX2"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black_text"
                 android:textSize="@dimen/text_size_s" />
@@ -82,9 +87,6 @@
                 android:inputType="number"
                 android:background="@color/transparent"
                 android:padding="@dimen/margin_baseX2"
-                android:drawableLeft="@drawable/ic_account_circle"
-                android:drawableStart="@drawable/ic_account_circle"
-                android:drawablePadding="@dimen/margin_baseX2"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black_text"
                 android:textSize="@dimen/text_size_s"/>
@@ -97,9 +99,6 @@
                 android:inputType="phone"
                 android:background="@color/transparent"
                 android:padding="@dimen/margin_baseX2"
-                android:drawableLeft="@drawable/ic_account_circle"
-                android:drawableStart="@drawable/ic_account_circle"
-                android:drawablePadding="@dimen/margin_baseX2"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black_text"
                 android:textSize="@dimen/text_size_s" />
@@ -112,9 +111,6 @@
                 android:inputType="number"
                 android:background="@color/transparent"
                 android:padding="@dimen/margin_baseX2"
-                android:drawableLeft="@drawable/ic_account_circle"
-                android:drawableStart="@drawable/ic_account_circle"
-                android:drawablePadding="@dimen/margin_baseX2"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black_text"
                 android:textSize="@dimen/text_size_s" />
@@ -127,9 +123,6 @@
                 android:inputType="textEmailAddress"
                 android:background="@color/transparent"
                 android:padding="@dimen/margin_baseX2"
-                android:drawableLeft="@drawable/ic_account_circle"
-                android:drawableStart="@drawable/ic_account_circle"
-                android:drawablePadding="@dimen/margin_baseX2"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black_text"
                 android:textSize="@dimen/text_size_s" />
@@ -142,12 +135,10 @@
                 android:hint="@string/hint_about"
                 android:background="@color/transparent"
                 android:padding="@dimen/margin_baseX2"
-                android:drawableLeft="@drawable/ic_account_circle"
-                android:drawableStart="@drawable/ic_account_circle"
-                android:drawablePadding="@dimen/margin_baseX2"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black_text"
-                android:textSize="@dimen/text_size_s" />
+                android:textSize="@dimen/text_size_s"
+                android:layout_marginBottom="10dp" />
 
         </LinearLayout>
 

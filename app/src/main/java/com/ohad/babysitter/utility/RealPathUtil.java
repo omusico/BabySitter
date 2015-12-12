@@ -117,6 +117,14 @@ public class RealPathUtil {
 		else
 			path = getRealPathFromURI_BelowAPI11(context, uri);
 
+		if (path == null) {
+			path = getRealPathFromURI2(context, uri);
+		}
+
+		if (path == null){
+			path = getRealPathFromSdPathUri(context, uri);
+		}
+
 		return path;
 	}
 	
@@ -184,5 +192,62 @@ public class RealPathUtil {
 	    return "com.android.providers.media.documents".equals(uri
 	            .getAuthority());
 	}
+
+	private static String getRealPathFromURI2(Context c, Uri contentUri) {
+
+		Cursor cursor = null;
+		try {
+			String[] projection = { MediaStore.Images.Media.DATA };
+			cursor = c.getContentResolver().query(contentUri, projection, null, null, null);
+			assert cursor != null;
+			int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+			cursor.moveToFirst();
+			return cursor.getString(column_index);
+		}
+		catch (Exception e) {
+			return null;
+		}
+		finally {
+			if (cursor != null) {
+				cursor.close();
+			}
+		}
+
+	}
+
+	public static String getRealPathFromSdPathUri(Context c, Uri contentUri) {
+		try {
+			// Will return "image:x*"
+			String wholeID = DocumentsContract.getDocumentId(contentUri);
+
+			// Split at colon, use second item in the array
+			String id = wholeID.split(":")[1];
+
+			// which information to take from the image
+			String[] column = { MediaStore.Images.Media.DATA };
+
+			// where id is equal to
+			String sel = MediaStore.Images.Media._ID + "=?";
+
+			Cursor cursor = c.getContentResolver().
+					query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+							column, sel, new String[]{ id }, null);
+
+			String filePath = "";
+
+			assert cursor != null;
+			int columnIndex = cursor.getColumnIndex(column[0]);
+
+			if (cursor.moveToFirst()) {
+				filePath = cursor.getString(columnIndex);
+			}
+
+			cursor.close();
+			return filePath;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 
 }

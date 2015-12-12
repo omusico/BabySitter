@@ -64,7 +64,11 @@ public class UserAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Glide.with(mContext).load(user.getProfilePictureUrl()).into(holder.pic);
+        if (user.getBitmap() != null) {
+            holder.pic.setImageBitmap(user.getBitmap());
+        } else {
+            Glide.with(mContext).load(user.getProfilePictureUrl()).into(holder.pic);
+        }
 
         holder.name.setText(user.getFullname() + " (" + user.getAge() + ")");
         holder.home.setText(user.getCity());

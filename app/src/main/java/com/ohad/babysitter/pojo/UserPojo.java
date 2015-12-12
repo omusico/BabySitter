@@ -1,5 +1,6 @@
 package com.ohad.babysitter.pojo;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -43,6 +44,8 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
     private String email;
     private int age;
     private int salary;
+
+    private Bitmap bitmap;
 
 
     // Mark: Constructors
@@ -176,6 +179,14 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
         this.email = Utility.isEmailValid(email) ? email : "X";
     }
 
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
     // Mark: Other
 
     @Override
@@ -230,6 +241,7 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
         dest.writeString(this.email);
         dest.writeInt(this.age);
         dest.writeInt(this.salary);
+        dest.writeParcelable(this.bitmap, 0);
     }
 
     protected UserPojo(Parcel in) {
@@ -244,6 +256,7 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
         this.email = in.readString();
         this.age = in.readInt();
         this.salary = in.readInt();
+        this.bitmap = in.readParcelable(Bitmap.class.getClassLoader());
     }
 
     public static final Creator<UserPojo> CREATOR = new Creator<UserPojo>() {

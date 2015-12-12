@@ -83,22 +83,7 @@ public class MainActivity extends ActivityBase implements AddUserDialog.AddUserC
         switch (item.getItemId()){
 
             case R.id.action_more: //----------------------------------> More
-                ParseLoginBuilder builder = new ParseLoginBuilder(this);
-                Intent parseLoginIntent = builder.setAppLogo(R.drawable.login_logo)
-                        .setParseLoginEnabled(true)
-                        .setParseLoginButtonText("Go")
-                        .setParseSignupButtonText("Register")
-                        .setParseLoginHelpText("Forgot password?")
-                        .setParseLoginInvalidCredentialsToastText("You email and/or password is not correct")
-                        .setParseLoginEmailAsUsername(true)
-                        .setParseSignupSubmitButtonText("Submit registration")
-                        .setFacebookLoginEnabled(true)
-                        .setFacebookLoginButtonText("Facebook")
-                        .setFacebookLoginPermissions(Arrays.asList("public_profile", "user_friends"))
-                        .setTwitterLoginEnabled(true)
-                        .setTwitterLoginButtontext("Twitter")
-                        .build();
-                startActivityForResult(parseLoginIntent, 0);
+
                 break;
 
             case R.id.action_add: //-----------------------------------> Add

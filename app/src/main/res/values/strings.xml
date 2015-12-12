@@ -16,6 +16,8 @@
     <string name="gen_add">Add</string>
     <string name="gen_show">Show</string>
     <string name="gen_done">Done</string>
+    <string name="gen_galleery">Gallery</string>
+    <string name="gen_camera">Camera</string>
 
     <!--TODO: Main Screen-->
     <string name="user_item_button_text">See Information</string>
@@ -29,8 +31,18 @@
     <string name="hint_city">City</string>
     <string name="hint_about">Something about yourself</string>
     <string name="intent_media_title">Choose Image Source</string>
-    <string name="gen_galleery">Gallery</string>
-    <string name="gen_camera">Camera</string>
     <string name="intent_media_gallery_title">Choose a Picture</string>
+    <string name="login_go">Go</string>
+    <string name="login_register">Register</string>
+    <string name="login_forgot_pass">Forgot password?</string>
+    <string name="login_invalid_details">You email and/or password is not correct</string>
+    <string name="login_submit_reg">Submit registration</string>
+    <string name="login_facebook">Facebook</string>
+    <string name="login_twitter">Twitter</string>
+    <string name="add_ad_invalid_first_name">You must enter first name!</string>
+    <string name="add_ad_invalid_last_name">You must enter last name!</string>
+    <string name="add_ad_invalid_city">You must enter city!</string>
+    <string name="add_ad_invalid_age">You must enter age!</string>
+    <string name="add_ad_invalid_phone">You must enter phone!</string>
 
 </resources>
