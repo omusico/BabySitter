@@ -25,21 +25,22 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:23.1.1'
     // TODO: Glide
+    // TODO: CircleImageView
+    // TODO: Parse
+    // TODO: Parse Login
+    // TODO: Apache
+    compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'com.android.support:support-v4:23.1.1'
-    // TODO: CircleImageView
     compile 'de.hdodenhof:circleimageview:2.0.0'
-    // TODO: Parse
     compile 'com.parse.bolts:bolts-android:1.2.1'
     compile 'com.parse:parse-android:1.10.2'
-    // TODO: Parse Login
     compile 'com.parse:parseui-login-android:0.0.1'
     compile 'com.parse:parseui-widget-android:0.0.1'
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
     compile 'com.parse:parsefacebookutils-v4-android:1.10.3@aar'
     compile 'com.parse:parsetwitterutils-android:1.10.3'
-    // TODO: Apache
     compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'com.android.support:design:23.1.1'
 }

@@ -4,9 +4,9 @@
     <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
     <!--</style>-->
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
 
-    <style parent="android:Theme.Dialog" name="DialogRTLTheme">
+    <style name="DialogRTLTheme" parent="android:Theme.Dialog">
         <!-- No backgrounds, titles or window float -->
         <item name="android:windowBackground">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -15,7 +15,7 @@
         <item name="android:windowAnimationStyle">@style/FromRightToLeft</item>
     </style>
 
-    <style parent="@android:style/Animation.Activity" name="FromRightToLeft">
+    <style name="FromRightToLeft" parent="@android:style/Animation.Activity">
         <item name="android:windowEnterAnimation">@anim/slide_in_right</item>
         <item name="android:windowExitAnimation">@anim/slide_out_right</item>
     </style>
@@ -23,5 +23,9 @@
     <style name="ToolbarColorsTheme" parent="AppTheme">
         <item name="android:textColorSecondary">@color/white</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
