@@ -18,12 +18,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Ohad on 26/11/2015.
  *
  */
-public class UserAdapter extends BaseAdapter {
+public class AdAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<UserPojo> mUsers;
 
-    public UserAdapter(Context context, List<UserPojo> users) {
+    public AdAdapter(Context context, List<UserPojo> users) {
         this.mContext = context;
         this.mUsers = users;
     }
@@ -49,7 +49,7 @@ public class UserAdapter extends BaseAdapter {
         final ViewHolder holder;
 
         if (convertView == null) {
-            convertView = View.inflate(mContext, R.layout.item_user, null);
+            convertView = View.inflate(mContext, R.layout.item_ad, null);
 
             holder = new ViewHolder();
 
@@ -70,7 +70,13 @@ public class UserAdapter extends BaseAdapter {
             Glide.with(mContext).load(user.getProfilePictureUrl()).into(holder.pic);
         }
 
-        holder.name.setText(user.getFullname() + " (" + user.getAge() + ")");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(user.getFullname());
+        stringBuilder.append(" (");
+        stringBuilder.append(user.getAge());
+        stringBuilder.append(")");
+
+        holder.name.setText(stringBuilder);
         holder.home.setText(user.getCity());
         holder.phone.setText(user.getPhone());
 

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.ohad.babysitter.utility.Constant;
 import com.ohad.babysitter.utility.Utility;
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
@@ -98,7 +99,7 @@ public class UserPojo extends ParseObject implements Parcelable {   //extends Pa
         final ParseFile parseFile = parseUser.getParseFile(KEY_PICTURE_COLUMN);
         this.profilePictureUrl = parseFile != null ?
                 parseFile.getUrl() :
-                "http://www.businesszone.co.uk/sites/all/themes/pp/img/default-user.png";
+                Constant.DEFAULT_PROFILE_IMAGE;
     }
 
     // TODO Mark: Setters/Getters

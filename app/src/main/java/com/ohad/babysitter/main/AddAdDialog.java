@@ -27,7 +27,7 @@ import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AddUserDialog extends DialogBase implements View.OnClickListener {
+public class AddAdDialog extends DialogBase implements View.OnClickListener {
 
     private static final int ACTION_REQUEST_GALLERY = 10;
     private static final int ACTION_REQUEST_CAMERA = 20;
@@ -45,7 +45,7 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
         void onAddUserCallbackResult(UserPojo userPojo);
     }
 
-    public AddUserDialog(Context context, AddUserCallback callback) {
+    public AddAdDialog(Context context, AddUserCallback callback) {
         super(context, R.style.DialogRTLTheme);
         mContext = context;
         mCallback = callback;
@@ -58,7 +58,7 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
 
     @Override
     public void initViews() {
-        setContentView(R.layout.dialog_add_user);
+        setContentView(R.layout.dialog_add_ad);
         mCivProfile = (CircleImageView) findViewById(R.id.civProfileImage);
         mEtFirstName = (EditText) findViewById(R.id.fn_editText);
         mEtLastName = (EditText) findViewById(R.id.ln_editText);
@@ -178,8 +178,6 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
             switch (requestCode) {
                 case ACTION_REQUEST_GALLERY:
                     try {
-                        //Bitmap bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), imageUri);
-
                         File file = new File(RealPathUtil.getRealPathFromURI(mContext, imageUri));
 
                         mCompressedBitmap = Utility.decodeFile(file, 150);

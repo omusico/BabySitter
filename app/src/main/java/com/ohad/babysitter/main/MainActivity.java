@@ -22,12 +22,12 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends ActivityBase implements AddUserDialog.AddUserCallback {
+public class MainActivity extends ActivityBase implements AddAdDialog.AddUserCallback {
 
     private ListView mListView;
     private List<UserPojo> mUsers;
-    private UserAdapter mAdapter;
-    private AddUserDialog mAddUserDialog;
+    private AdAdapter mAdapter;
+    private AddAdDialog mAddUserDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ public class MainActivity extends ActivityBase implements AddUserDialog.AddUserC
 
     private void initList() {
         mUsers = new ArrayList<>();
-        mAdapter = new UserAdapter(this, mUsers);
+        mAdapter = new AdAdapter(this, mUsers);
         mListView.setAdapter(mAdapter);
     }
 
@@ -98,7 +98,7 @@ public class MainActivity extends ActivityBase implements AddUserDialog.AddUserC
                 break;
 
             case R.id.action_add: //-------------------------------------> Add
-                mAddUserDialog = new AddUserDialog(this, this);
+                mAddUserDialog = new AddAdDialog(this, this);
                 mAddUserDialog.show();
                 break;
         }

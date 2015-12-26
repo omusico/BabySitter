@@ -6,7 +6,7 @@
     android:id="@+id/fbcContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_mdm"
+    android:background="@color/blue_toolbar"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ohad.babysitter.main.UserProfileActivity"
     tools:showIn="@layout/activity_user_profile">
@@ -14,11 +14,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/margin_baseX1"
         android:layout_margin="@dimen/margin_baseX1"
-        android:paddingLeft="@dimen/margin_baseX2"
-        android:paddingRight="@dimen/margin_baseX2"
-        android:paddingStart="@dimen/margin_baseX2"
-        android:paddingEnd="@dimen/margin_baseX2"
         android:background="@drawable/user_profile_bg"
         android:orientation="vertical">
 
@@ -41,29 +38,39 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tvAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/margin_baseX1"
-                android:text="@string/hint_age"
-                android:textSize="@dimen/text_size_m"
-                android:textColor="@color/blue_primary"
-                android:layout_weight="1" />
-
-            <View
-                android:layout_width="0.5dp"
-                android:layout_height="match_parent"
-                android:background="@color/grey_mdm"/>
-
-            <TextView
                 android:id="@+id/tvBirth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hint_birthday"
                 android:textSize="@dimen/text_size_m"
                 android:textColor="@color/blue_primary"
+                android:gravity="center"
                 android:padding="@dimen/margin_baseX1"
                 android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_mdm"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_baseX1"
+                android:gravity="center"
+                android:text="@string/hint_gender"
+                android:textSize="@dimen/text_size_m"
+                android:textColor="@color/blue_primary"
+                android:layout_weight="1"
+                android:maxLines="1" />
 
             <View
                 android:layout_width="0.5dp"
@@ -77,6 +84,7 @@
                 android:text="@string/hint_salary"
                 android:textSize="@dimen/text_size_m"
                 android:textColor="@color/blue_primary"
+                android:gravity="center"
                 android:padding="@dimen/margin_baseX1"
                 android:layout_weight="1" />
 
