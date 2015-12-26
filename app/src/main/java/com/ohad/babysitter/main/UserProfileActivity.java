@@ -57,10 +57,11 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
         mUser = getIntent().getParcelableExtra(UserPojo.KEY_CLASS_NAME);
 
         if (mUser == null) {
-            //ParseUser.class
             ProgressBarClass.startLoading(this);
+
             ParseQuery<ParseUser> query = ParseUser.getQuery();
             query.whereEqualTo(UserPojo.KEY_USER_ID, mUserId);
+
             query.getFirstInBackground(new GetCallback<ParseUser>() {
                 @Override
                 public void done(ParseUser object, ParseException e) {
@@ -70,13 +71,16 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
                     } else {
                         mUser = Self.getInstance();
                     }
+
+                    mColToolbar.setTitle(mUser.getFullname());
+
                     Utility.d(mUser.toString());
                 }
             });
+
         }
 
         mFloatingBtn.setOnClickListener(this);
-        mColToolbar.setTitle("Ohad Shiffer");
 
     }
 

@@ -45,7 +45,6 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
         void onAddUserCallbackResult(UserPojo userPojo);
     }
 
-
     public AddUserDialog(Context context, AddUserCallback callback) {
         super(context, R.style.DialogRTLTheme);
         mContext = context;
@@ -79,6 +78,7 @@ public class AddUserDialog extends DialogBase implements View.OnClickListener {
         ImageView doneIv = (ImageView) mToolbar.findViewById(R.id.confirm_done);
         backIv.setOnClickListener(this);
         doneIv.setOnClickListener(this);
+        mToolbar.setTitle(R.string.add_ad_title);
     }
 
     @Override

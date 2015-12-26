@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.ohad.babysitter.R;
 import com.ohad.babysitter.base.activity.ActivityBase;
 import com.ohad.babysitter.pojo.UserPojo;
+import com.ohad.babysitter.utility.ParseErrorHandler;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -37,17 +38,20 @@ public class MainActivity extends ActivityBase implements AddUserDialog.AddUserC
 
     private void refresh() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(UserPojo.KEY_CLASS_NAME);
-        //query.whereLessThan("age", 50);
-        //query.whereGreaterThan("age", 20);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
-                mUsers.clear();
-                for (int i = 0; i < objects.size(); i++) {
-                    ParseObject parseObject = objects.get(i);
-                    UserPojo userPojo = new UserPojo(parseObject);
-                    mUsers.add(userPojo);
-                    mAdapter.notifyDataSetChanged();
+                if (e == null) { // Query successful
+                    mUsers.clear();
+
+                    for (int i = 0; i < objects.size(); i++) {
+                        ParseObject parseObject = objects.get(i);
+                        UserPojo userPojo = new UserPojo(parseObject);
+                        mUsers.add(userPojo);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                } else { // Query failed
+                    ParseErrorHandler.handleParseError(MainActivity.this, e);
                 }
             }
         });

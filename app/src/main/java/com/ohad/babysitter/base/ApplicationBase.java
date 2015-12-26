@@ -13,12 +13,18 @@ import com.parse.ParseObject;
  */
 public class ApplicationBase extends Application {
 
+    private static ApplicationBase sInstance;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-        // Initialize Parse
-        initParse();
+        sInstance = (ApplicationBase) this.getApplicationContext();
+        initParse(); // Initialize Parse
+    }
+
+    public static ApplicationBase getInstance() {
+        return sInstance;
     }
 
     private void initParse() {

@@ -6,14 +6,125 @@
     android:id="@+id/fbcContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ohad.babysitter.main.UserProfileActivity"
     tools:showIn="@layout/activity_user_profile">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+        android:layout_margin="@dimen/margin_baseX1"
+        android:paddingLeft="@dimen/margin_baseX2"
+        android:paddingRight="@dimen/margin_baseX2"
+        android:paddingStart="@dimen/margin_baseX2"
+        android:paddingEnd="@dimen/margin_baseX2"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_baseX1"
+            android:text="@string/user_profile_personal_info"
+            android:textSize="@dimen/text_size_l"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_dark"/>
+
+        <com.gregacucnik.EditTextView
+            android:id="@+id/ettFirst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ettIcon="@drawable/ic_account_circle"
+            app:ettIconEmpty="@drawable/ic_account_circle"
+            app:ettIconInEditMode="@drawable/ic_account_circle"
+            app:ettEmptyTexStyle="normal"
+            app:ettShowHint="false"
+            app:ettEmptyText="@string/hint_first_name" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_dark"/>
+
+        <com.gregacucnik.EditTextView
+            android:id="@+id/ettLast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ettIcon="@drawable/ic_account_circle"
+            app:ettIconEmpty="@drawable/ic_account_circle"
+            app:ettIconInEditMode="@drawable/ic_account_circle"
+            app:ettEmptyTexStyle="normal"
+            app:ettShowHint="false"
+            app:ettEmptyText="@string/hint_last_name" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_dark"/>
+
+        <com.gregacucnik.EditTextView
+            android:id="@+id/ettCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ettIcon="@drawable/ic_home_black"
+            app:ettIconEmpty="@drawable/ic_home_black"
+            app:ettIconInEditMode="@drawable/ic_home_black"
+            app:ettEmptyTexStyle="normal"
+            app:ettShowHint="false"
+            app:ettEmptyText="@string/hint_city" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_dark"/>
+
+        <com.gregacucnik.EditTextView
+            android:id="@+id/ettPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ettIcon="@drawable/ic_phone"
+            app:ettIconEmpty="@drawable/ic_phone"
+            app:ettIconInEditMode="@drawable/ic_phone"
+            app:ettEmptyTexStyle="normal"
+            app:ettShowHint="false"
+            app:ettEmptyText="@string/hint_phone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_dark"/>
+
+        <com.gregacucnik.EditTextView
+            android:id="@+id/ettEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ettIcon="@drawable/ic_account_circle"
+            app:ettIconEmpty="@drawable/ic_account_circle"
+            app:ettIconInEditMode="@drawable/ic_account_circle"
+            app:ettEmptyTexStyle="normal"
+            app:ettShowHint="false"
+            app:ettEmptyText="@string/hint_email" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_dark"/>
+
+        <com.gregacucnik.EditTextView
+            android:id="@+id/ettAbout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ettIcon="@drawable/ic_account_circle"
+            app:ettIconEmpty="@drawable/ic_account_circle"
+            app:ettIconInEditMode="@drawable/ic_account_circle"
+            app:ettEmptyTexStyle="normal"
+            app:ettShowHint="false"
+            app:ettEmptyText="@string/hint_about" />
+
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
