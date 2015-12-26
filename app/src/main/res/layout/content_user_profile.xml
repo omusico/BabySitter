@@ -6,7 +6,7 @@
     android:id="@+id/fbcContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/grey_mdm"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ohad.babysitter.main.UserProfileActivity"
     tools:showIn="@layout/activity_user_profile">
@@ -19,7 +19,7 @@
         android:paddingRight="@dimen/margin_baseX2"
         android:paddingStart="@dimen/margin_baseX2"
         android:paddingEnd="@dimen/margin_baseX2"
-        android:background="@color/white"
+        android:background="@drawable/user_profile_bg"
         android:orientation="vertical">
 
         <TextView
@@ -27,12 +27,65 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_baseX1"
             android:text="@string/user_profile_personal_info"
+            android:textColor="@color/blue_primary"
             android:textSize="@dimen/text_size_l"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray_dark"/>
+            android:background="@color/grey_mdm"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_baseX1"
+                android:text="@string/hint_age"
+                android:textSize="@dimen/text_size_m"
+                android:textColor="@color/blue_primary"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/grey_mdm"/>
+
+            <TextView
+                android:id="@+id/tvBirth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_birthday"
+                android:textSize="@dimen/text_size_m"
+                android:textColor="@color/blue_primary"
+                android:padding="@dimen/margin_baseX1"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/grey_mdm"/>
+
+            <TextView
+                android:id="@+id/tvSalary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_salary"
+                android:textSize="@dimen/text_size_m"
+                android:textColor="@color/blue_primary"
+                android:padding="@dimen/margin_baseX1"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/grey_mdm"/>
 
         <com.gregacucnik.EditTextView
             android:id="@+id/ettFirst"
@@ -48,15 +101,15 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/gray_dark"/>
+            android:background="@color/grey_mdm"/>
 
         <com.gregacucnik.EditTextView
             android:id="@+id/ettLast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:ettIcon="@drawable/ic_account_circle"
-            app:ettIconEmpty="@drawable/ic_account_circle"
-            app:ettIconInEditMode="@drawable/ic_account_circle"
+            app:ettIcon="@drawable/ic_group"
+            app:ettIconEmpty="@drawable/ic_group"
+            app:ettIconInEditMode="@drawable/ic_group"
             app:ettEmptyTexStyle="normal"
             app:ettShowHint="false"
             app:ettEmptyText="@string/hint_last_name" />
@@ -64,7 +117,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/gray_dark"/>
+            android:background="@color/grey_mdm"/>
 
         <com.gregacucnik.EditTextView
             android:id="@+id/ettCity"
@@ -80,7 +133,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/gray_dark"/>
+            android:background="@color/grey_mdm"/>
 
         <com.gregacucnik.EditTextView
             android:id="@+id/ettPhone"
@@ -96,15 +149,15 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/gray_dark"/>
+            android:background="@color/grey_mdm"/>
 
         <com.gregacucnik.EditTextView
             android:id="@+id/ettEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:ettIcon="@drawable/ic_account_circle"
-            app:ettIconEmpty="@drawable/ic_account_circle"
-            app:ettIconInEditMode="@drawable/ic_account_circle"
+            app:ettIcon="@drawable/ic_email"
+            app:ettIconEmpty="@drawable/ic_email"
+            app:ettIconInEditMode="@drawable/ic_email"
             app:ettEmptyTexStyle="normal"
             app:ettShowHint="false"
             app:ettEmptyText="@string/hint_email" />
@@ -112,15 +165,15 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/gray_dark"/>
+            android:background="@color/grey_mdm"/>
 
         <com.gregacucnik.EditTextView
             android:id="@+id/ettAbout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:ettIcon="@drawable/ic_account_circle"
-            app:ettIconEmpty="@drawable/ic_account_circle"
-            app:ettIconInEditMode="@drawable/ic_account_circle"
+            app:ettIcon="@drawable/ic_info"
+            app:ettIconEmpty="@drawable/ic_info"
+            app:ettIconInEditMode="@drawable/ic_info"
             app:ettEmptyTexStyle="normal"
             app:ettShowHint="false"
             app:ettEmptyText="@string/hint_about" />

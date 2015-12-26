@@ -88,7 +88,6 @@ public class MainActivity extends ActivityBase implements AddUserDialog.AddUserC
         switch (item.getItemId()){
 
             case R.id.action_profile:
-                // TODO: 12/12/2015 start profile activity
                 UserProfileActivity.start(this, ParseUser.getCurrentUser().getObjectId());
                 break;
 

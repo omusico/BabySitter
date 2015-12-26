@@ -58,7 +58,8 @@
     <string name="add_ad_invalid_age">You must enter age!</string>
     <string name="add_ad_invalid_phone">You must enter phone!</string>
     <string name="add_ad_title">Post Something</string>
-
+    <string name="hint_birthday">Birthday</string>
+    <string name="picker_age_title">What is your age?</string>
 
 
 </resources>
