@@ -39,10 +39,8 @@ import com.parse.SaveCallback;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 public class UserProfileActivity extends ActivityBase implements View.OnClickListener {
 
@@ -64,7 +62,7 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
 
     public static void start(Context context, String userId) {
         Intent starter = new Intent(context, UserProfileActivity.class);
-        starter.putExtra(UserPojo.KEY_USER_ID, userId);
+        starter.putExtra(UserPojo.KEY_OBJECT_ID, userId);
         context.startActivity(starter);
     }
 
@@ -72,7 +70,7 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final String mUserId = getIntent().getStringExtra(UserPojo.KEY_USER_ID);
+        final String mUserId = getIntent().getStringExtra(UserPojo.KEY_OBJECT_ID);
 
         mCalendar = Calendar.getInstance();
 
@@ -83,7 +81,7 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
             ProgressBarClass.startLoading(this);
 
             ParseQuery<ParseUser> query = ParseUser.getQuery();
-            query.whereEqualTo(UserPojo.KEY_USER_ID, mUserId);
+            query.whereEqualTo(UserPojo.KEY_OBJECT_ID, mUserId);
 
             query.getFirstInBackground(new GetCallback<ParseUser>() {
                 @Override

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ohad.babysitter.R;
 import com.ohad.babysitter.pojo.UserPojo;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -55,8 +56,10 @@ public class AdAdapter extends BaseAdapter {
 
             holder.pic = (CircleImageView) convertView.findViewById(R.id.profile_imageView);
             holder.name = (TextView) convertView.findViewById(R.id.name_textView);
-            holder.home = (TextView) convertView.findViewById(R.id.home_textView);
+            holder.home = (TextView) convertView.findViewById(R.id.city_textView);
             holder.phone = (TextView) convertView.findViewById(R.id.phone_textView);
+            holder.email = (TextView) convertView.findViewById(R.id.email_textView);
+            holder.salary = (TextView) convertView.findViewById(R.id.salary_textView);
             holder.show = (TextView) convertView.findViewById(R.id.show_textView);
 
             convertView.setTag(holder);
@@ -70,7 +73,7 @@ public class AdAdapter extends BaseAdapter {
             Glide.with(mContext).load(user.getProfilePictureUrl()).into(holder.pic);
         }
 
-        StringBuilder stringBuilder = new StringBuilder();
+        final StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(user.getFullname());
         stringBuilder.append(" (");
         stringBuilder.append(user.getAge());
@@ -79,6 +82,18 @@ public class AdAdapter extends BaseAdapter {
         holder.name.setText(stringBuilder);
         holder.home.setText(user.getCity());
         holder.phone.setText(user.getPhone());
+        holder.email.setText(user.getEmail());
+        holder.salary.setText(String.valueOf(user.getSalary()));
+
+        holder.show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String userId = user.getUserId();
+                if (userId != null) {
+                    UserProfileActivity.start(mContext, userId);
+                }
+            }
+        });
 
         return convertView;
     }
@@ -88,6 +103,8 @@ public class AdAdapter extends BaseAdapter {
         TextView name;
         TextView home;
         TextView phone;
+        TextView email;
+        TextView salary;
         TextView show;
     }
 

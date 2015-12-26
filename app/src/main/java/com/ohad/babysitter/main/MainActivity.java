@@ -20,6 +20,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends ActivityBase implements AddAdDialog.AddUserCallback {
@@ -48,8 +49,11 @@ public class MainActivity extends ActivityBase implements AddAdDialog.AddUserCal
                         ParseObject parseObject = objects.get(i);
                         UserPojo userPojo = new UserPojo(parseObject);
                         mUsers.add(userPojo);
-                        mAdapter.notifyDataSetChanged();
                     }
+
+                    Collections.reverse(mUsers);
+                    //Collections.sort(mUsers);
+                    mAdapter.notifyDataSetChanged();
                 } else { // Query failed
                     ParseErrorHandler.handleParseError(MainActivity.this, e);
                 }
