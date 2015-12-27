@@ -6,6 +6,8 @@ import com.ohad.babysitter.R;
 import com.ohad.babysitter.pojo.UserPojo;
 import com.parse.Parse;
 import com.parse.ParseObject;
+import com.squareup.otto.Bus;
+import com.squareup.otto.ThreadEnforcer;
 
 /**
  * Created by Ohad on 27/11/2015.
@@ -32,4 +34,13 @@ public class ApplicationBase extends Application {
         //Parse.enableLocalDatastore(this);
         ParseObject.registerSubclass(UserPojo.class);
     }
+
+    // ------------------------------MARK: EventBus----------------------------------
+
+    private final Bus mBus = new Bus(ThreadEnforcer.ANY);
+
+    public Bus getBus() {
+        return mBus;
+    }
+
 }

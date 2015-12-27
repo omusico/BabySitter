@@ -282,8 +282,6 @@ public class UserPojo extends ParseObject implements Parcelable, Comparable<User
         saveInBackground();
     }
 
-    // TODO Mark: Parcelable
-
     @Override
     public int compareTo(UserPojo another) {
         if (created > another.created) {
@@ -294,6 +292,8 @@ public class UserPojo extends ParseObject implements Parcelable, Comparable<User
             return -1;
         }
     }
+
+    // TODO Mark: Parcelable
 
     @Override
     public int describeContents() {

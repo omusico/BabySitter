@@ -16,4 +16,9 @@ public class Constant {
     public static final String DEFAULT_PROFILE_IMAGE = "http://www.businesszone.co.uk/sites/all/themes/pp/img/default-user.png";
 
 
+    // TODO Mark: Ad Types
+    public static final int AD_TYPE_EMPLOYEE = 108;
+    public static final int AD_TYPE_EMPLOYER = 415;
+
+
 }

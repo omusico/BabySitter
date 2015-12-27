@@ -20,6 +20,7 @@
     <string name="gen_done">Done</string>
     <string name="gen_galleery">Gallery</string>
     <string name="gen_camera">Camera</string>
+    <string name="gen_loading">Loading</string>
 
     <!--TODO: Login/Signup-->
     <string name="login_go">Go</string>
@@ -42,17 +43,21 @@
     <string name="hint_gender">Gender</string>
     <string name="hint_male">Male</string>
     <string name="hint_female">Female</string>
+    <string name="hint_birthday">Birthday</string>
 
     <!--TODO: Personal Information-->
     <string name="user_profile_personal_info">Personal Info</string>
+    <string name="picker_age_title">What is your age?</string>
 
     <!--TODO: Main Screen-->
     <string name="user_item_button_text">See Information</string>
+    <string name="user_profile_empty_first_name_">First Name</string>
     <string name="main_title">Find your baby sitter</string>
     <string name="intent_media_title">Choose Image Source</string>
     <string name="intent_media_gallery_title">Choose a Picture</string>
     <string name="error_session_invalid">Session is no longer valid, please log out and log in again.</string>
-    <string name="user_profile_empty_first_name_">First Name</string>
+    <string name="main_pager_tab_first_name">Employee</string>
+    <string name="main_pager_tab_second_name">Employer</string>
 
     <!--TODO: Add Ad-->
     <string name="add_ad_invalid_first_name">You must enter first name!</string>
@@ -61,9 +66,8 @@
     <string name="add_ad_invalid_age">You must enter age!</string>
     <string name="add_ad_invalid_phone">You must enter phone!</string>
     <string name="add_ad_title">Post Something</string>
-    <string name="hint_birthday">Birthday</string>
-    <string name="picker_age_title">What is your age?</string>
-    <string name="gen_loading">Loading</string>
+
+
 
 
 </resources>

@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -6,13 +7,21 @@
 
     <include layout="@layout/toolbar_base" />
 
-    <ListView
+    <com.ohad.babysitter.thirdparty.PagerSlidingTabStrip
+        android:id="@+id/mTabs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/main_listView"
-        android:dividerHeight="@dimen/main_listview_divider_height"
-        android:headerDividersEnabled="true"
-        android:footerDividersEnabled="true"
-        android:divider="@color/transparent" />
+        android:layout_height="50dp"
+        android:background="@color/white"
+        app:pstsActivateTextColor="@color/blue_toolbar"
+        app:pstsDeactivateTextColor="@color/blue_toolbar"
+        app:pstsIndicatorColor="@color/blue_toolbar"
+        app:pstsDividerColor="@color/blue_toolbar"
+        app:pstsIndicatorHeight="2dp"
+        app:pstsShouldExpand="true"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

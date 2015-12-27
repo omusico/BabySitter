@@ -104,7 +104,7 @@ public class AddAdDialog extends DialogBase implements View.OnClickListener {
                     userPojo.setEmail(mEtEmail.getText().toString());
                     userPojo.setBirthday("7/9/1988");
                     userPojo.setBitmap(mCompressedBitmap);
-                    userPojo.put(UserPojo.KEY_PICTURE_COLUMN, mImageParseFile);
+                    userPojo.put(UserPojo.KEY_PICTURE_COLUMN, mImageParseFile == null ? "" : mImageParseFile);
                     userPojo.put(UserPojo.KEY_USER_ID, ParseUser.getCurrentUser().getObjectId());
                     userPojo.put(UserPojo.KEY_CREATED_COLUMN, String.valueOf(Calendar.getInstance().getTimeInMillis()));
                     mCallback.onAddUserCallbackResult(userPojo);

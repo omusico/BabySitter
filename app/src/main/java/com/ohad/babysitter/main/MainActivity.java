@@ -3,68 +3,42 @@ package com.ohad.babysitter.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.ohad.babysitter.R;
+import com.ohad.babysitter.base.ApplicationBase;
 import com.ohad.babysitter.base.activity.ActivityBase;
 import com.ohad.babysitter.pojo.UserPojo;
-import com.ohad.babysitter.utility.ParseErrorHandler;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
+import com.ohad.babysitter.thirdparty.PagerSlidingTabStrip;
+import com.ohad.babysitter.utility.Constant;
 import com.parse.ParseUser;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+public class MainActivity extends ActivityBase implements AddAdDialog.AddUserCallback, MainActivityInterface {
 
-public class MainActivity extends ActivityBase implements AddAdDialog.AddUserCallback {
+    private ViewPager mPager;
+    private PagerSlidingTabStrip mTabs;
 
-    private ListView mListView;
-    private List<UserPojo> mUsers;
-    private AdAdapter mAdapter;
     private AddAdDialog mAddUserDialog;
+    private boolean mWasResultReturnedToActivity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initList();
-        refresh();
-    }
-
-    private void refresh() {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(UserPojo.KEY_CLASS_NAME);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-                if (e == null) { // Query successful
-                    mUsers.clear();
-
-                    for (int i = 0; i < objects.size(); i++) {
-                        ParseObject parseObject = objects.get(i);
-                        UserPojo userPojo = new UserPojo(parseObject);
-                        mUsers.add(userPojo);
-                    }
-
-                    Collections.reverse(mUsers);
-                    //Collections.sort(mUsers);
-                    mAdapter.notifyDataSetChanged();
-                } else { // Query failed
-                    ParseErrorHandler.handleParseError(MainActivity.this, e);
-                }
-            }
-        });
     }
 
     @Override
     public void initViews() {
         setContentView(R.layout.activity_main);
-        mListView = (ListView) findViewById(R.id.main_listView);
+        mPager = (ViewPager) findViewById(R.id.mPager);
+        mTabs = (PagerSlidingTabStrip) findViewById(R.id.mTabs);
+
+        MainPagerAdapter pagerAdapter = new MainPagerAdapter(this, getSupportFragmentManager());
+        mPager.setAdapter(pagerAdapter);
+        mTabs.setViewPager(mPager);
     }
 
     @Override
@@ -73,12 +47,6 @@ public class MainActivity extends ActivityBase implements AddAdDialog.AddUserCal
         mToolbar.setTitle(R.string.main_title);
         mToolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
         setSupportActionBar(mToolbar);
-    }
-
-    private void initList() {
-        mUsers = new ArrayList<>();
-        mAdapter = new AdAdapter(this, mUsers);
-        mListView.setAdapter(mAdapter);
     }
 
     @Override
@@ -112,19 +80,23 @@ public class MainActivity extends ActivityBase implements AddAdDialog.AddUserCal
 
     @Override
     public void onAddUserCallbackResult(UserPojo userPojo) {
-        try {
-            userPojo.saveToParse();
-            mUsers.add(0, userPojo);
-            mAdapter.notifyDataSetChanged();
-        } catch (Exception e) {
-            Toast.makeText(this, "Cannot create ad. Reason:\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
+        MainActivityBus bus = new MainActivityBus(Constant.AD_TYPE_EMPLOYEE, MainActivityBus.ACTION_ADD_AD);
+        bus.setAd(userPojo);
+        ApplicationBase.getInstance().getBus().post(bus);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mAddUserDialog.onActivityResult(requestCode, resultCode, data);
+        mWasResultReturnedToActivity = true;
     }
+
+    @Override
+    public void onFragmentResumed(FragmentMain fragment) {
+        if (mWasResultReturnedToActivity) {
+            mWasResultReturnedToActivity = false;
+        }
+    }
+
 }
