@@ -29,11 +29,11 @@ import com.ohad.babysitter.pojo.UserPojo;
 import com.ohad.babysitter.utility.Constant;
 import com.ohad.babysitter.utility.GenderPicker;
 import com.ohad.babysitter.utility.ParseErrorHandler;
+import com.ohad.babysitter.utility.ParseHandler;
 import com.ohad.babysitter.utility.ProgressBarClass;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -80,10 +80,7 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
         } else {
             ProgressBarClass.startLoading(this);
 
-            ParseQuery<ParseUser> query = ParseUser.getQuery();
-            query.whereEqualTo(UserPojo.KEY_OBJECT_ID, mUserId);
-
-            query.getFirstInBackground(new GetCallback<ParseUser>() {
+            ParseHandler.getParseUser(mUserId, new GetCallback<ParseUser>() {
                 @Override
                 public void done(ParseUser object, ParseException e) {
                     ProgressBarClass.dismissLoading();
@@ -216,7 +213,7 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
 
                 mUser.put(Constant.KEY_BIRTHDAY_COLUMN, stringBuilder.toString());
                 mUser.put(UserPojo.KEY_AGE_COLUMN, age);
-                mUser.put(Constant.KEY_DATE_OF_BIRTH_COLUMN, String.valueOf(mCalendar.getTimeInMillis()));
+                mUser.put(Constant.KEY_CREATED_COLUMN, String.valueOf(mCalendar.getTimeInMillis()));
 
                 stringBuilder.append(" (");
                 stringBuilder.append(age);
@@ -267,7 +264,7 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
         StringBuilder stringBuilder;
 
         // init calendar
-        final String dateOfBirth = mUser.getString(Constant.KEY_DATE_OF_BIRTH_COLUMN);
+        final String dateOfBirth = mUser.getString(Constant.KEY_CREATED_COLUMN);
         if (StringUtils.isNumeric(dateOfBirth)){
             final long time = Long.parseLong(dateOfBirth);
             mCalendar.setTimeInMillis(time);
@@ -279,7 +276,7 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
         Glide.with(this).load(picUrl).into(mIvProfile);
 
         // init title
-        setToolbarTitle(mUser.getString(Constant.KEY_NAME_COLUMN));
+        setToolbarTitle(mUser.getString(Constant.KEY_FULL_NAME_COLUMN));
 
         // init gender
         stringBuilder = new StringBuilder(getString(R.string.hint_gender));
@@ -330,7 +327,7 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 //Utility.d("verticalOffset: " + verticalOffset);
                 if (verticalOffset < -200) {
-                    mToolbar.setBackgroundColor(ContextCompat.getColor(UserProfileActivity.this, R.color.blue_toolbar));
+                    mToolbar.setBackgroundColor(ContextCompat.getColor(UserProfileActivity.this, R.color.toolbar));
                 } else {
                     mToolbar.setBackgroundColor(ContextCompat.getColor(UserProfileActivity.this, R.color.transparent));
                 }

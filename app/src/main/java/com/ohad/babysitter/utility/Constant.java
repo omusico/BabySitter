@@ -8,8 +8,8 @@ public class Constant {
 
 
     // TODO Mark: User
-    public static final String KEY_NAME_COLUMN = "name";
-    public static final String KEY_DATE_OF_BIRTH_COLUMN = "date_of_birth";
+    public static final String KEY_FULL_NAME_COLUMN = "full_name";
+    public static final String KEY_CREATED_COLUMN = "created";
     public static final String KEY_BIRTHDAY_COLUMN = "birthday";
 
 

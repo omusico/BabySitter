@@ -13,13 +13,20 @@ import com.ohad.babysitter.R;
 import com.ohad.babysitter.base.ApplicationBase;
 import com.ohad.babysitter.base.activity.ActivityBase;
 import com.ohad.babysitter.main.fragments.FragmentMain;
+import com.ohad.babysitter.pojo.Self;
 import com.ohad.babysitter.pojo.UserPojo;
 import com.ohad.babysitter.thirdparty.PagerSlidingTabStrip;
 import com.ohad.babysitter.user.UserProfileActivity;
+import com.ohad.babysitter.utility.AdPicker;
 import com.ohad.babysitter.utility.Constant;
+import com.ohad.babysitter.utility.ParseHandler;
+import com.ohad.babysitter.utility.ProgressBarClass;
+import com.ohad.babysitter.utility.Utility;
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 
-public class MainActivity extends ActivityBase implements AddAdDialog.AddUserCallback, MainActivityInterface {
+public class MainActivity extends ActivityBase implements AddAdDialog.AddUserCallback, MainActivityInterface, AdPicker.AdPickerCallback {
 
     private ViewPager mPager;
     private PagerSlidingTabStrip mTabs;
@@ -73,8 +80,7 @@ public class MainActivity extends ActivityBase implements AddAdDialog.AddUserCal
                 break;
 
             case R.id.action_add: //-------------------------------------> Add
-                mAddUserDialog = new AddAdDialog(this, this);
-                mAddUserDialog.show();
+                new AdPicker(this, this).show();
                 break;
         }
 
@@ -102,4 +108,34 @@ public class MainActivity extends ActivityBase implements AddAdDialog.AddUserCal
         }
     }
 
+    @Override
+    public void onAdPicked(int ad) {
+        switch (ad) {
+            case R.string.hint_manuel:
+                mAddUserDialog = new AddAdDialog(this, this);
+                mAddUserDialog.show();
+                break;
+
+            case R.string.hint_auto:
+                ParseHandler.getParseUser(ParseUser.getCurrentUser().getObjectId(), new GetCallback<ParseUser>() {
+                    @Override
+                    public void done(ParseUser object, ParseException e) {
+                        ProgressBarClass.dismissLoading();
+                        final ParseUser parseUser = object == null ? Self.getInstance() : object;
+
+                        MainActivityBus bus = new MainActivityBus(Constant.AD_TYPE_EMPLOYEE, MainActivityBus.ACTION_ADD_AD);
+                        bus.setAd(new UserPojo(parseUser));
+                        ApplicationBase.getInstance().getBus().post(bus);
+                    }
+                });
+                //final UserPojo userPojo = new UserPojo(ParseUser.getCurrentUser());
+                //Utility.d(userPojo.toString());
+                break;
+
+            case R.string.hint_sos:
+
+                break;
+
+        }
+    }
 }

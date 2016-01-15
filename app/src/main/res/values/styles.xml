@@ -6,7 +6,7 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--<item name="android:navigationBarColor">@color/blue_toolbar</item>-->
-        <item name="android:colorPrimaryDark">@color/blue_toolbar_light</item>
+        <item name="android:colorPrimaryDark">@color/toolbar_upper</item>
     </style>
 
     <style name="DialogRTLTheme" parent="android:Theme.Dialog">

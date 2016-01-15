@@ -8,7 +8,13 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.ohad.babysitter.R;
+import com.ohad.babysitter.pojo.Self;
+import com.ohad.babysitter.pojo.UserPojo;
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 
 import java.io.ByteArrayOutputStream;
@@ -143,7 +149,6 @@ public class Utility {
 
         return new ParseFile("baby_sitter_" + name + ".png", image);
     }
-
 
 
 }

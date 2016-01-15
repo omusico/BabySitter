@@ -73,9 +73,6 @@ public class UserPojo extends ParseObject implements Parcelable, Comparable<User
         if (parseObject.has(KEY_PHONE_COLUMN))
             put(KEY_PHONE_COLUMN, parseObject.getString(KEY_PHONE_COLUMN));
 
-//        if (parseObject.has(KEY_BIRTHDAY_COLUMN))
-//            put(KEY_BIRTHDAY_COLUMN, parseObject.getString(KEY_BIRTHDAY_COLUMN));
-
         if (parseObject.has(KEY_EMAIL_COLUMN))
             put(KEY_EMAIL_COLUMN, parseObject.getString(KEY_EMAIL_COLUMN));
 
@@ -109,17 +106,16 @@ public class UserPojo extends ParseObject implements Parcelable, Comparable<User
     public UserPojo(ParseUser parseUser){
         super(KEY_CLASS_NAME);
         setObjectId(parseUser.getObjectId());
-        put(KEY_USER_ID, parseUser.getString(KEY_USER_ID));
+        put(KEY_USER_ID, parseUser.getObjectId());
         put(KEY_FIRST_NAME_COLUMN, parseUser.getString(KEY_FIRST_NAME_COLUMN));
         put(KEY_LAST_NAME_COLUMN, parseUser.getString(KEY_LAST_NAME_COLUMN));
         put(KEY_FULL_NAME_COLUMN, parseUser.getString(KEY_FULL_NAME_COLUMN));
         put(KEY_CITY_COLUMN, parseUser.getString(KEY_CITY_COLUMN));
         put(KEY_PHONE_COLUMN, parseUser.getString(KEY_PHONE_COLUMN));
-//        put(KEY_BIRTHDAY_COLUMN, parseUser.getString(KEY_BIRTHDAY_COLUMN));
         put(KEY_EMAIL_COLUMN, parseUser.getString(KEY_EMAIL_COLUMN));
         put(KEY_ABOUT_COLUMN, parseUser.getString(KEY_ABOUT_COLUMN));
         put(KEY_GENDER_COLUMN, parseUser.getString(KEY_GENDER_COLUMN));
-        put(KEY_SALARY_COLUMN, parseUser.getString(KEY_SALARY_COLUMN));
+        //put(KEY_SALARY_COLUMN, parseUser.getString(KEY_SALARY_COLUMN));
         put(KEY_CREATED_COLUMN, parseUser.getInt(KEY_CREATED_COLUMN));
         put(KEY_AGE_COLUMN, parseUser.getInt(KEY_AGE_COLUMN));
 

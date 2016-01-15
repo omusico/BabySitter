@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvManuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/hint_manuel"
+        android:textSize="@dimen/text_size_m"
+        android:gravity="center"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:drawableTop="@drawable/ic_manuel_ad"
+        android:padding="@dimen/margin_baseX3"/>
+
+    <TextView
+        android:id="@+id/tvAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/hint_auto"
+        android:textSize="@dimen/text_size_m"
+        android:gravity="center"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:drawableTop="@drawable/ic_auto_ad"
+        android:padding="@dimen/margin_baseX3" />
+
+    <TextView
+        android:id="@+id/tvSos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/hint_sos"
+        android:textSize="@dimen/text_size_m"
+        android:gravity="center"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:drawableTop="@drawable/ic_sos_ad"
+        android:padding="@dimen/margin_baseX3" />
+
+</LinearLayout>

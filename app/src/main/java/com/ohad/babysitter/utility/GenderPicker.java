@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ohad.babysitter.R;
+import com.ohad.babysitter.model.OnTouchSelector;
 
 /**
  * Created by Ohad on 26/12/2015.
@@ -17,7 +18,6 @@ public class GenderPicker {
 
     private AlertDialog mAlertDialog;
     private GenderPickerCallback mCallback;
-    private Context mContext;
 
 
     public interface GenderPickerCallback {
@@ -25,44 +25,29 @@ public class GenderPicker {
     }
 
     public GenderPicker(Context context, GenderPickerCallback callback) {
-        mContext = context;
         mCallback = callback;
 
-        View view = View.inflate(mContext, R.layout.picker_gender, null);
+        View view = View.inflate(context, R.layout.picker_gender, null);
         final TextView tvMale = (TextView) view.findViewById(R.id.tvMale);
         final TextView tvFemale = (TextView) view.findViewById(R.id.tvFemale);
 
-        mAlertDialog = new AlertDialog.Builder(mContext)
+        mAlertDialog = new AlertDialog.Builder(context)
                 .setCancelable(true)
                 .setView(view)
                 .create();
 
-        tvMale.setOnClickListener(new OnGenderPickedListener(mContext.getString(R.string.hint_male)));
-        tvMale.setOnTouchListener(onTouchListener);
+        final OnTouchSelector selector = new OnTouchSelector(context, R.color.toolbar, R.color.transparent);
 
-        tvFemale.setOnClickListener(new OnGenderPickedListener(mContext.getString(R.string.hint_female)));
-        tvFemale.setOnTouchListener(onTouchListener);
+        tvMale.setOnClickListener(new OnGenderPickedListener(context.getString(R.string.hint_male)));
+        tvMale.setOnTouchListener(selector);
+
+        tvFemale.setOnClickListener(new OnGenderPickedListener(context.getString(R.string.hint_female)));
+        tvFemale.setOnTouchListener(selector);
     }
 
     public void show() {
         mAlertDialog.show();
     }
-
-    private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.blue_primary));
-                    break;
-
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.transparent));
-                    break;
-            }
-            return false;
-        }
-    };
 
     private class OnGenderPickedListener implements View.OnClickListener{
 

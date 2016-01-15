@@ -21,8 +21,10 @@
     <color name="blue">#0000ff</color>
     <color name="blue_primary">#607D8B</color>
     <color name="blue_primary_dark">#455A64</color>
-    <color name="blue_toolbar_light">#637109</color>
-    <color name="blue_toolbar">#b7ab26</color>
+
+    <!--TODO: Toolbar-->
+    <color name="toolbar_upper">#637109</color>
+    <color name="toolbar">#b7ab26</color>
 
     <!--TODO: Grey-->
     <color name="grey">#a1a1a1</color>

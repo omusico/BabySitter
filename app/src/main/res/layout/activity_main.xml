@@ -7,15 +7,20 @@
 
     <include layout="@layout/toolbar_base" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/toolbar_separator"/>
+
     <com.ohad.babysitter.thirdparty.PagerSlidingTabStrip
         android:id="@+id/mTabs"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"
-        app:pstsActivateTextColor="@color/blue_toolbar"
-        app:pstsDeactivateTextColor="@color/blue_toolbar"
-        app:pstsIndicatorColor="@color/blue_toolbar"
-        app:pstsDividerColor="@color/blue_toolbar"
+        app:pstsActivateTextColor="@color/toolbar"
+        app:pstsDeactivateTextColor="@color/toolbar"
+        app:pstsIndicatorColor="@color/toolbar"
+        app:pstsDividerColor="@color/toolbar"
         app:pstsIndicatorHeight="2dp"
         app:pstsShouldExpand="true"/>
 

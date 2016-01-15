@@ -44,6 +44,9 @@
     <string name="hint_male">Male</string>
     <string name="hint_female">Female</string>
     <string name="hint_birthday">Birthday</string>
+    <string name="hint_manuel">Manuel</string>
+    <string name="hint_auto">Auto</string>
+    <string name="hint_sos">SOS</string>
 
     <!--TODO: Personal Information-->
     <string name="user_profile_personal_info">Personal Info</string>
