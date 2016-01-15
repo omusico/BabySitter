@@ -63,11 +63,11 @@
     <string name="add_ad_invalid_first_name">You must enter first name!</string>
     <string name="add_ad_invalid_last_name">You must enter last name!</string>
     <string name="add_ad_invalid_city">You must enter city!</string>
+    <string name="add_ad_invalid_gender">You must enter gender!</string>
     <string name="add_ad_invalid_age">You must enter age!</string>
     <string name="add_ad_invalid_phone">You must enter phone!</string>
     <string name="add_ad_title">Post Something</string>
-
-
+    <string name="error_cant_create_ad">Cannot create ad. Reason:\n</string>
 
 
 </resources>

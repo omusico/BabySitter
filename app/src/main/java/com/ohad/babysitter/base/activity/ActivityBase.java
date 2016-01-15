@@ -18,12 +18,5 @@ public abstract class ActivityBase extends AppCompatActivity implements Activity
         mInterface = this;
         mInterface.initViews();
         mInterface.initToolbar();
-
-        /*Toolbar mToolbar = mInterface.initToolbar();
-
-        if (mToolbar != null){
-            setSupportActionBar(mToolbar);
-            getSupportActionBar().setHomeButtonEnabled(true);
-        }*/
     }
 }

@@ -8,11 +8,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.ohad.babysitter.main.Ad.AddAdDialog;
 import com.ohad.babysitter.R;
 import com.ohad.babysitter.base.ApplicationBase;
 import com.ohad.babysitter.base.activity.ActivityBase;
+import com.ohad.babysitter.main.fragments.FragmentMain;
 import com.ohad.babysitter.pojo.UserPojo;
 import com.ohad.babysitter.thirdparty.PagerSlidingTabStrip;
+import com.ohad.babysitter.user.UserProfileActivity;
 import com.ohad.babysitter.utility.Constant;
 import com.parse.ParseUser;
 

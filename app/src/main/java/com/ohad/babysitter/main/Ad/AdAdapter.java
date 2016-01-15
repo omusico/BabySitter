@@ -1,4 +1,4 @@
-package com.ohad.babysitter.main;
+package com.ohad.babysitter.main.Ad;
 
 import android.content.Context;
 import android.view.View;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.ohad.babysitter.R;
+import com.ohad.babysitter.user.UserProfileActivity;
 import com.ohad.babysitter.pojo.UserPojo;
-import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -61,6 +61,7 @@ public class AdAdapter extends BaseAdapter {
             holder.email = (TextView) convertView.findViewById(R.id.email_textView);
             holder.salary = (TextView) convertView.findViewById(R.id.salary_textView);
             holder.show = (TextView) convertView.findViewById(R.id.show_textView);
+            holder.gender= (TextView) convertView.findViewById(R.id.gender_textView);
 
             convertView.setTag(holder);
         } else{
@@ -70,11 +71,11 @@ public class AdAdapter extends BaseAdapter {
         if (user.getBitmap() != null) {
             holder.pic.setImageBitmap(user.getBitmap());
         } else {
-            Glide.with(mContext).load(user.getProfilePictureUrl()).into(holder.pic);
+            Glide.with(mContext).load(user.getString(UserPojo.KEY_PROFILE_IMAGE_URL_COLUMN)).into(holder.pic);
         }
 
         final StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(user.getFullname());
+        stringBuilder.append(user.getFullName());
         stringBuilder.append(" (");
         stringBuilder.append(user.getAge());
         stringBuilder.append(")");
@@ -83,7 +84,8 @@ public class AdAdapter extends BaseAdapter {
         holder.home.setText(user.getCity());
         holder.phone.setText(user.getPhone());
         holder.email.setText(user.getEmail());
-        holder.salary.setText(String.valueOf(user.getSalary()));
+        holder.salary.setText(user.getSalary());
+        holder.gender.setText(user.getGender());
 
         holder.show.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +108,7 @@ public class AdAdapter extends BaseAdapter {
         TextView email;
         TextView salary;
         TextView show;
+        TextView gender;
     }
 
 }

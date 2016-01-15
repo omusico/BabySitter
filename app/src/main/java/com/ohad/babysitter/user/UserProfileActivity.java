@@ -1,4 +1,4 @@
-package com.ohad.babysitter.main;
+package com.ohad.babysitter.user;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -214,7 +214,7 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
                 stringBuilder.append("/");
                 stringBuilder.append(year);
 
-                mUser.put(UserPojo.KEY_BIRTHDAY_COLUMN, stringBuilder.toString());
+                mUser.put(Constant.KEY_BIRTHDAY_COLUMN, stringBuilder.toString());
                 mUser.put(UserPojo.KEY_AGE_COLUMN, age);
                 mUser.put(Constant.KEY_DATE_OF_BIRTH_COLUMN, String.valueOf(mCalendar.getTimeInMillis()));
 
@@ -274,7 +274,7 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
         }
 
         // init profile picture
-        final ParseFile parseFile = mUser.getParseFile(UserPojo.KEY_PICTURE_COLUMN);
+        final ParseFile parseFile = mUser.getParseFile(UserPojo.KEY_PICTURE_FILE_COLUMN);
         final String picUrl = parseFile != null ? parseFile.getUrl() : Constant.DEFAULT_PROFILE_IMAGE;
         Glide.with(this).load(picUrl).into(mIvProfile);
 
@@ -294,7 +294,7 @@ public class UserProfileActivity extends ActivityBase implements View.OnClickLis
         mTvSalary.setText(stringBuilder);
 
         // init birthday
-        stringBuilder = new StringBuilder(mUser.getString(UserPojo.KEY_BIRTHDAY_COLUMN));
+        stringBuilder = new StringBuilder(mUser.getString(Constant.KEY_BIRTHDAY_COLUMN));
         stringBuilder.append(" (");
         stringBuilder.append(mUser.getInt(UserPojo.KEY_AGE_COLUMN));
         stringBuilder.append(")");

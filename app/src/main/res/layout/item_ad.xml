@@ -57,6 +57,17 @@
             android:gravity="top|start">
 
             <TextView
+                android:id="@+id/gender_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/text_size_m"
+                android:drawableLeft="@drawable/ic_gender_black"
+                android:drawableStart="@drawable/ic_gender_black"
+                android:drawablePadding="5dp"
+                android:layout_marginTop="10dp" />
+
+            <TextView
                 android:id="@+id/city_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,7 +76,6 @@
                 android:drawableLeft="@drawable/ic_home_black"
                 android:drawableStart="@drawable/ic_home_black"
                 android:drawablePadding="5dp"
-                android:typeface="serif"
                 android:layout_marginTop="10dp" />
 
             <TextView
@@ -77,7 +87,6 @@
                 android:drawableLeft="@drawable/ic_phone"
                 android:drawableStart="@drawable/ic_phone"
                 android:drawablePadding="5dp"
-                android:typeface="serif"
                 android:layout_marginTop="10dp" />
 
             <TextView
@@ -89,7 +98,6 @@
                 android:drawableLeft="@drawable/ic_email"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="5dp"
-                android:typeface="serif"
                 android:layout_marginTop="10dp" />
 
             <TextView
@@ -101,7 +109,6 @@
                 android:drawableLeft="@drawable/ic_salary"
                 android:drawableStart="@drawable/ic_salary"
                 android:drawablePadding="5dp"
-                android:typeface="serif"
                 android:layout_marginTop="10dp" />
 
             <TextView
@@ -112,6 +119,7 @@
                 android:gravity="center|end"
                 android:textColor="@color/blue_primary_dark"
                 android:padding="10dp" />
+
         </LinearLayout>
 
     </LinearLayout>

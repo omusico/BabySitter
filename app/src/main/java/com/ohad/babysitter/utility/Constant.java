@@ -10,6 +10,7 @@ public class Constant {
     // TODO Mark: User
     public static final String KEY_NAME_COLUMN = "name";
     public static final String KEY_DATE_OF_BIRTH_COLUMN = "date_of_birth";
+    public static final String KEY_BIRTHDAY_COLUMN = "birthday";
 
 
     // TODO Mark: Default

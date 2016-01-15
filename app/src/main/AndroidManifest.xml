@@ -45,7 +45,7 @@
                 android:value="true" />
         </activity>
         <activity
-            android:name=".main.UserProfileActivity"
+            android:name=".user.UserProfileActivity"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme">
             <meta-data

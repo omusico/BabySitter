@@ -67,6 +67,17 @@
 
             </RelativeLayout>
 
+            <TextView
+                android:id="@+id/tvGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/grey"
+                android:hint="@string/hint_gender"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_baseX2"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/text_size_s"/>
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

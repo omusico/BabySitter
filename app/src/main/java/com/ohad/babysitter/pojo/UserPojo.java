@@ -3,9 +3,9 @@ package com.ohad.babysitter.pojo;
 import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.ohad.babysitter.utility.Constant;
-import com.ohad.babysitter.utility.Utility;
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -21,39 +21,23 @@ import org.apache.commons.lang3.StringUtils;
 @ParseClassName("UserPojo")
 public class UserPojo extends ParseObject implements Parcelable, Comparable<UserPojo> {   //extends ParseObject
 
+    public static final String KEY_CLASS_NAME = "UserPojo";
+
     public static final String KEY_OBJECT_ID = "objectId";
     public static final String KEY_USER_ID = "user_id";
-    public static final String KEY_CLASS_NAME = "UserPojo";
     public static final String KEY_FIRST_NAME_COLUMN = "first_name";
     public static final String KEY_LAST_NAME_COLUMN = "last_name";
     public static final String KEY_FULL_NAME_COLUMN = "full_name";
     public static final String KEY_CITY_COLUMN = "city";
     public static final String KEY_PHONE_COLUMN = "phone";
-    public static final String KEY_PROFILE_IMAGE_COLUMN = "profile_image";
-    public static final String KEY_BIRTHDAY_COLUMN = "birthday";
+    public static final String KEY_PROFILE_IMAGE_URL_COLUMN = "profile_image";
     public static final String KEY_AGE_COLUMN = "age";
     public static final String KEY_ABOUT_COLUMN = "about";
     public static final String KEY_SALARY_COLUMN = "salary";
     public static final String KEY_EMAIL_COLUMN = "email";
-    public static final String KEY_PICTURE_COLUMN = "picture_file";
+    public static final String KEY_PICTURE_FILE_COLUMN = "picture_file";
     public static final String KEY_GENDER_COLUMN = "gender";
     public static final String KEY_CREATED_COLUMN = "created";
-
-
-    private String id;
-    private String userId;
-    private String firstName;
-    private String lastName;
-    private String profilePictureUrl;
-    private String city;
-    private String phone;
-    private String about;
-    private String birthday;
-    private String email;
-    private String gender;
-    private int age;
-    private int salary;
-    private long created;
 
     private Bitmap bitmap;
 
@@ -69,228 +53,222 @@ public class UserPojo extends ParseObject implements Parcelable, Comparable<User
 
     public UserPojo(ParseObject parseObject){
         super(KEY_CLASS_NAME);
-        this.id = parseObject.getObjectId();
-        this.userId = parseObject.getString(KEY_USER_ID);
-        this.firstName = parseObject.getString(KEY_FIRST_NAME_COLUMN);
-        this.lastName = parseObject.getString(KEY_LAST_NAME_COLUMN);
-        this.city = parseObject.getString(KEY_CITY_COLUMN);
-        this.phone = parseObject.getString(KEY_PHONE_COLUMN);
-        this.birthday = parseObject.getString(KEY_BIRTHDAY_COLUMN);
-        this.age = parseObject.getInt(KEY_AGE_COLUMN);
-        this.email = parseObject.getString(KEY_EMAIL_COLUMN);
-        this.salary = parseObject.getInt(KEY_SALARY_COLUMN);
-        this.about = parseObject.getString(KEY_ABOUT_COLUMN);
-        this.gender = parseObject.getString(KEY_GENDER_COLUMN);
-        this.created = parseObject.getLong(KEY_CREATED_COLUMN);
+        setObjectId(parseObject.getObjectId());
 
-        final ParseFile parseFile = parseObject.getParseFile(KEY_PICTURE_COLUMN);
-        this.profilePictureUrl = parseFile == null ? null : parseFile.getUrl();
+        if (parseObject.has(KEY_USER_ID))
+            put(KEY_USER_ID, parseObject.getString(KEY_USER_ID));
 
+        if (parseObject.has(KEY_FIRST_NAME_COLUMN))
+            put(KEY_FIRST_NAME_COLUMN, parseObject.getString(KEY_FIRST_NAME_COLUMN));
+
+        if (parseObject.has(KEY_LAST_NAME_COLUMN))
+            put(KEY_LAST_NAME_COLUMN, parseObject.getString(KEY_LAST_NAME_COLUMN));
+
+        if (parseObject.has(KEY_FULL_NAME_COLUMN))
+            put(KEY_FULL_NAME_COLUMN, parseObject.getString(KEY_FULL_NAME_COLUMN));
+
+        if (parseObject.has(KEY_CITY_COLUMN))
+            put(KEY_CITY_COLUMN, parseObject.getString(KEY_CITY_COLUMN));
+
+        if (parseObject.has(KEY_PHONE_COLUMN))
+            put(KEY_PHONE_COLUMN, parseObject.getString(KEY_PHONE_COLUMN));
+
+//        if (parseObject.has(KEY_BIRTHDAY_COLUMN))
+//            put(KEY_BIRTHDAY_COLUMN, parseObject.getString(KEY_BIRTHDAY_COLUMN));
+
+        if (parseObject.has(KEY_EMAIL_COLUMN))
+            put(KEY_EMAIL_COLUMN, parseObject.getString(KEY_EMAIL_COLUMN));
+
+        if (parseObject.has(KEY_SALARY_COLUMN))
+            put(KEY_SALARY_COLUMN, parseObject.getString(KEY_SALARY_COLUMN));
+
+        if (parseObject.has(KEY_ABOUT_COLUMN))
+            put(KEY_ABOUT_COLUMN, parseObject.getString(KEY_ABOUT_COLUMN));
+
+        if (parseObject.has(KEY_AGE_COLUMN))
+            put(KEY_AGE_COLUMN, parseObject.getInt(KEY_AGE_COLUMN));
+
+        if (parseObject.has(KEY_GENDER_COLUMN))
+            put(KEY_GENDER_COLUMN, parseObject.getString(KEY_GENDER_COLUMN));
+
+        if (parseObject.has(KEY_CREATED_COLUMN))
+            put(KEY_CREATED_COLUMN, parseObject.getInt(KEY_CREATED_COLUMN));
+
+        if (parseObject.getString(KEY_PICTURE_FILE_COLUMN) != null)
+            put(KEY_PICTURE_FILE_COLUMN, parseObject.getString(KEY_PICTURE_FILE_COLUMN));
+
+        final ParseFile parseFile = parseObject.getParseFile(KEY_PICTURE_FILE_COLUMN);
+        final String profileImageUrl = parseFile != null ?
+                parseFile.getUrl() :
+                Constant.DEFAULT_PROFILE_IMAGE;
+
+
+        put(KEY_PROFILE_IMAGE_URL_COLUMN, profileImageUrl);
     }
 
     public UserPojo(ParseUser parseUser){
         super(KEY_CLASS_NAME);
-        this.id = parseUser.getObjectId();
-        this.userId = parseUser.getString(KEY_USER_ID);
-        this.firstName = parseUser.getString(KEY_FIRST_NAME_COLUMN);
-        this.lastName = parseUser.getString(KEY_LAST_NAME_COLUMN);
-        this.city = parseUser.getString(KEY_CITY_COLUMN);
-        this.phone = parseUser.getString(KEY_PHONE_COLUMN);
-        this.birthday = parseUser.getString(KEY_BIRTHDAY_COLUMN);
-        this.age = parseUser.getInt(KEY_AGE_COLUMN);
-        this.email = parseUser.getString(KEY_EMAIL_COLUMN);
-        this.about = parseUser.getString(KEY_ABOUT_COLUMN);
-        this.gender = parseUser.getString(KEY_GENDER_COLUMN);
+        setObjectId(parseUser.getObjectId());
+        put(KEY_USER_ID, parseUser.getString(KEY_USER_ID));
+        put(KEY_FIRST_NAME_COLUMN, parseUser.getString(KEY_FIRST_NAME_COLUMN));
+        put(KEY_LAST_NAME_COLUMN, parseUser.getString(KEY_LAST_NAME_COLUMN));
+        put(KEY_FULL_NAME_COLUMN, parseUser.getString(KEY_FULL_NAME_COLUMN));
+        put(KEY_CITY_COLUMN, parseUser.getString(KEY_CITY_COLUMN));
+        put(KEY_PHONE_COLUMN, parseUser.getString(KEY_PHONE_COLUMN));
+//        put(KEY_BIRTHDAY_COLUMN, parseUser.getString(KEY_BIRTHDAY_COLUMN));
+        put(KEY_EMAIL_COLUMN, parseUser.getString(KEY_EMAIL_COLUMN));
+        put(KEY_ABOUT_COLUMN, parseUser.getString(KEY_ABOUT_COLUMN));
+        put(KEY_GENDER_COLUMN, parseUser.getString(KEY_GENDER_COLUMN));
+        put(KEY_SALARY_COLUMN, parseUser.getString(KEY_SALARY_COLUMN));
+        put(KEY_CREATED_COLUMN, parseUser.getInt(KEY_CREATED_COLUMN));
+        put(KEY_AGE_COLUMN, parseUser.getInt(KEY_AGE_COLUMN));
 
-        final ParseFile parseFile = parseUser.getParseFile(KEY_PICTURE_COLUMN);
-        this.profilePictureUrl = parseFile != null ?
+        if (parseUser.getString(KEY_PICTURE_FILE_COLUMN) != null) {
+            put(KEY_PICTURE_FILE_COLUMN, parseUser.getString(KEY_PICTURE_FILE_COLUMN));
+        }
+
+        final ParseFile parseFile = parseUser.getParseFile(KEY_PICTURE_FILE_COLUMN);
+        final String profileImageUrl = parseFile != null ?
                 parseFile.getUrl() :
                 Constant.DEFAULT_PROFILE_IMAGE;
+
+        put(KEY_PROFILE_IMAGE_URL_COLUMN, profileImageUrl);
     }
 
-    // TODO Mark: Setters/Getters
+    // TODO Mark: Getters
+
+    public String getUserId() {
+        return getString(KEY_USER_ID);
+    }
 
     public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        return getString(KEY_FIRST_NAME_COLUMN);
     }
 
     public String getLastName() {
-        return lastName;
+        return getString(KEY_LAST_NAME_COLUMN);
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getProfilePictureUrl() {
-        return profilePictureUrl;
-    }
-
-    public void setProfilePictureUrl(String profilePictureUrl) {
-        this.profilePictureUrl = profilePictureUrl;
+    public String getFullName() {
+        return getString(KEY_FULL_NAME_COLUMN);
     }
 
     public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setAge(String age) {
-        this.age = StringUtils.isNumeric(age) ? Integer.parseInt(age) : 0;
-    }
-
-    public String getFullname(){
-        return firstName + " " + lastName;
+        return getString(KEY_CITY_COLUMN);
     }
 
     public String getPhone() {
-        return phone;
+        return getString(KEY_PHONE_COLUMN);
     }
 
-    public void setPhone(String phone) {
-        this.phone = Utility.isValidPhoneNumber(phone) ? phone : "X";
-    }
+//    public String getBirthday() {
+//        return getString(KEY_BIRTHDAY_COLUMN);
+//    }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public String getEmail() {
+        return getString(KEY_EMAIL_COLUMN);
     }
 
     public String getAbout() {
-        return about;
+        return getString(KEY_ABOUT_COLUMN);
     }
 
-    public void setAbout(String about) {
-        this.about = about;
+    public String getGender() {
+        return getString(KEY_GENDER_COLUMN);
     }
 
-    public int getSalary() {
-        return salary;
+    public String getSalary() {
+        return getString(KEY_SALARY_COLUMN);
     }
 
-    public void setSalary(int salary) {
-        this.salary = salary;
+    public int getAge() {
+        return getInt(KEY_AGE_COLUMN);
     }
 
-    public void setSalary(String salary) {
-        this.salary = StringUtils.isNumeric(salary) ? Integer.valueOf(salary) : 0;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = Utility.isEmailValid(email) ? email : "X";
+    public long getCreated() {
+        return getLong(KEY_CREATED_COLUMN);
     }
 
     public Bitmap getBitmap() {
         return bitmap;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    // TODO Mark: Setters
+
+    public void setFirstName(String firstName) {
+        put(KEY_FIRST_NAME_COLUMN, firstName);
     }
 
-    public String getGender() {
-        return gender;
+    public void setLastName(String lastName) {
+        put(KEY_LAST_NAME_COLUMN, lastName);
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public long getCreated() {
-        return created;
-    }
-
-    public void setCreated(long created) {
-        this.created = created;
-    }
-
-    public String getUserId() {
-        return userId;
+    public void setFullName(String fullName) {
+        put(KEY_FULL_NAME_COLUMN, fullName);
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        put(KEY_USER_ID, userId);
+    }
+
+    public void setCity(String city) {
+        put(KEY_CITY_COLUMN, city);
+    }
+
+    public void setPhone(String phone) {
+        put(KEY_PHONE_COLUMN, phone);
+    }
+
+    public void setEmail(String email) {
+        put(KEY_EMAIL_COLUMN, email);
+    }
+
+//    public void setBirthday(String birthday) {
+//        put(KEY_BIRTHDAY_COLUMN, birthday);
+//    }
+
+    public void setAbout(String about) {
+        put(KEY_ABOUT_COLUMN, about);
+    }
+
+    public void setGender(String gender) {
+        put(KEY_GENDER_COLUMN, gender);
+    }
+
+    public void setAge(int age) {
+        put(KEY_AGE_COLUMN, age);
+    }
+
+    public void setAge(String age) {
+        if (StringUtils.isNumeric(age)) {
+            put(KEY_AGE_COLUMN, Integer.valueOf(age));
+        }
+    }
+
+    public void setSalary(String salary) {
+        put(KEY_SALARY_COLUMN, salary);
+    }
+
+    public void setCreated(long created) {
+        put(KEY_CREATED_COLUMN, created);
+    }
+
+    public void setPictureFile(ParseFile pictureFile){
+        put(UserPojo.KEY_PICTURE_FILE_COLUMN, pictureFile == null ? "" : pictureFile);
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 
     // TODO Mark: Other
 
     @Override
-    public String toString() {
-        return "UserPojo{" +
-                "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", profilePictureUrl='" + profilePictureUrl + '\'' +
-                ", city='" + city + '\'' +
-                ", phone='" + phone + '\'' +
-                ", about='" + about + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", email='" + email + '\'' +
-                ", gender='" + gender + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                ", created=" + created +
-                ", bitmap=" + bitmap +
-                '}';
-    }
+    public int compareTo(@NonNull UserPojo another) {
+        final int myCreated = getInt(KEY_CREATED_COLUMN);
+        final int anotherCreated = another.getInt(KEY_CREATED_COLUMN);
 
-    public void saveToParse(){
-        put(UserPojo.KEY_FIRST_NAME_COLUMN, firstName == null ? "" : firstName);
-        put(UserPojo.KEY_LAST_NAME_COLUMN, lastName == null ? "" : lastName);
-        put(UserPojo.KEY_FULL_NAME_COLUMN, getFullname() == null ? "" : getFullname());
-        put(UserPojo.KEY_PHONE_COLUMN, phone == null ? "" : phone);
-        put(UserPojo.KEY_BIRTHDAY_COLUMN, birthday == null ? "" : birthday);
-        put(UserPojo.KEY_AGE_COLUMN, age);
-        put(UserPojo.KEY_CITY_COLUMN, city == null ? "" : city);
-        put(UserPojo.KEY_PROFILE_IMAGE_COLUMN, profilePictureUrl == null ? "" : profilePictureUrl);
-        put(UserPojo.KEY_ABOUT_COLUMN, about == null ? "" : about);
-        put(UserPojo.KEY_EMAIL_COLUMN, email == null ? "" : email);
-        put(UserPojo.KEY_SALARY_COLUMN, salary);
-        put(UserPojo.KEY_GENDER_COLUMN, gender == null ? "" : gender);
-        put(UserPojo.KEY_CREATED_COLUMN, created);
-        saveInBackground();
-    }
-
-    @Override
-    public int compareTo(UserPojo another) {
-        if (created > another.created) {
-            return 1;
-        } else if (created == another.created) {
-            return 0;
-        } else {
-            return -1;
-        }
+        return myCreated < anotherCreated ? -1 : (myCreated == anotherCreated ? 0 : 1);
     }
 
     // TODO Mark: Parcelable
@@ -302,38 +280,10 @@ public class UserPojo extends ParseObject implements Parcelable, Comparable<User
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
-        dest.writeString(this.userId);
-        dest.writeString(this.firstName);
-        dest.writeString(this.lastName);
-        dest.writeString(this.profilePictureUrl);
-        dest.writeString(this.city);
-        dest.writeString(this.phone);
-        dest.writeString(this.about);
-        dest.writeString(this.birthday);
-        dest.writeString(this.email);
-        dest.writeString(this.gender);
-        dest.writeInt(this.age);
-        dest.writeInt(this.salary);
-        dest.writeLong(this.created);
         dest.writeParcelable(this.bitmap, 0);
     }
 
     protected UserPojo(Parcel in) {
-        this.id = in.readString();
-        this.userId = in.readString();
-        this.firstName = in.readString();
-        this.lastName = in.readString();
-        this.profilePictureUrl = in.readString();
-        this.city = in.readString();
-        this.phone = in.readString();
-        this.about = in.readString();
-        this.birthday = in.readString();
-        this.email = in.readString();
-        this.gender = in.readString();
-        this.age = in.readInt();
-        this.salary = in.readInt();
-        this.created = in.readLong();
         this.bitmap = in.readParcelable(Bitmap.class.getClassLoader());
     }
 

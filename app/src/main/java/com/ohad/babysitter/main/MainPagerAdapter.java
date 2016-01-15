@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ohad.babysitter.R;
+import com.ohad.babysitter.main.fragments.EmployeeFragment;
+import com.ohad.babysitter.main.fragments.EmployerFragment;
 
 public class MainPagerAdapter extends FragmentPagerAdapter {
 

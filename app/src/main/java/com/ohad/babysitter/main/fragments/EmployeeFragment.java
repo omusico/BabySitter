@@ -1,23 +1,29 @@
-package com.ohad.babysitter.main;
+package com.ohad.babysitter.main.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.ohad.babysitter.main.Ad.AdAdapter;
 import com.ohad.babysitter.R;
 import com.ohad.babysitter.base.ApplicationBase;
+import com.ohad.babysitter.main.MainActivityBus;
+import com.ohad.babysitter.main.MainActivityInterface;
 import com.ohad.babysitter.pojo.UserPojo;
 import com.ohad.babysitter.utility.Constant;
 import com.ohad.babysitter.utility.ParseErrorHandler;
+import com.ohad.babysitter.utility.Utility;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -28,8 +34,9 @@ import java.util.List;
  * Created by Ohad on 27/12/2015.
  *
  */
-public class EmployeeFragment extends FragmentMain {
+public class EmployeeFragment extends FragmentMain implements SwipeRefreshLayout.OnRefreshListener {
 
+    private SwipeRefreshLayout mSwipe;
     private ListView mListView;
     private List<UserPojo> mUsers;
     private AdAdapter mAdapter;
@@ -48,6 +55,8 @@ public class EmployeeFragment extends FragmentMain {
 
     private void initViews(View view) {
         mListView = (ListView) view.findViewById(R.id.main_listView);
+        mSwipe = (SwipeRefreshLayout) view.findViewById(R.id.mSwipe);
+        mSwipe.setOnRefreshListener(this);
     }
 
     private void initList() {
@@ -57,6 +66,7 @@ public class EmployeeFragment extends FragmentMain {
     }
 
     private void refresh() {
+        mSwipe.setRefreshing(true);
         ParseQuery<ParseObject> query = ParseQuery.getQuery(UserPojo.KEY_CLASS_NAME);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -76,6 +86,7 @@ public class EmployeeFragment extends FragmentMain {
                 } else { // Query failed
                     ParseErrorHandler.handleParseError(getActivity(), e);
                 }
+                mSwipe.setRefreshing(false);
             }
         });
     }
@@ -115,16 +126,27 @@ public class EmployeeFragment extends FragmentMain {
                 try {
                     final UserPojo userPojo = bus.getAd();
                     if (userPojo != null) {
-                        userPojo.saveToParse();
+                        userPojo.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e != null)
+                                    Utility.d(e.getMessage());
+                            }
+                        });
                         mUsers.add(0, userPojo);
                         mAdapter.notifyDataSetChanged();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), "Cannot create ad. Reason:\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.error_cant_create_ad) + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
 
+    }
+
+    @Override
+    public void onRefresh() {
+        refresh();
     }
 
 }

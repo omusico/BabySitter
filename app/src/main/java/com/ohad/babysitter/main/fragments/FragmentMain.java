@@ -1,4 +1,4 @@
-package com.ohad.babysitter.main;
+package com.ohad.babysitter.main.fragments;
 
 import android.content.Context;
 import android.os.Bundle;

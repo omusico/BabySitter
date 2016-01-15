@@ -4,7 +4,10 @@
     <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
     <!--</style>-->
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--<item name="android:navigationBarColor">@color/blue_toolbar</item>-->
+        <item name="android:colorPrimaryDark">@color/blue_toolbar_light</item>
+    </style>
 
     <style name="DialogRTLTheme" parent="android:Theme.Dialog">
         <!-- No backgrounds, titles or window float -->
