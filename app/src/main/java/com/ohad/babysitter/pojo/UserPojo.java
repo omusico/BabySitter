@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import com.ohad.babysitter.utility.Constant;
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -38,6 +39,7 @@ public class UserPojo extends ParseObject implements Parcelable, Comparable<User
     public static final String KEY_PICTURE_FILE_COLUMN = "picture_file";
     public static final String KEY_GENDER_COLUMN = "gender";
     public static final String KEY_CREATED_COLUMN = "created";
+    public static final String KEY_LOCATION_COLUMN = "location";
 
     private Bitmap bitmap;
 
@@ -105,7 +107,6 @@ public class UserPojo extends ParseObject implements Parcelable, Comparable<User
 
     public UserPojo(ParseUser parseUser){
         super(KEY_CLASS_NAME);
-        setObjectId(parseUser.getObjectId());
         put(KEY_USER_ID, parseUser.getObjectId());
         put(KEY_FIRST_NAME_COLUMN, parseUser.getString(KEY_FIRST_NAME_COLUMN));
         put(KEY_LAST_NAME_COLUMN, parseUser.getString(KEY_LAST_NAME_COLUMN));
@@ -157,10 +158,6 @@ public class UserPojo extends ParseObject implements Parcelable, Comparable<User
         return getString(KEY_PHONE_COLUMN);
     }
 
-//    public String getBirthday() {
-//        return getString(KEY_BIRTHDAY_COLUMN);
-//    }
-
     public String getEmail() {
         return getString(KEY_EMAIL_COLUMN);
     }
@@ -183,6 +180,10 @@ public class UserPojo extends ParseObject implements Parcelable, Comparable<User
 
     public long getCreated() {
         return getLong(KEY_CREATED_COLUMN);
+    }
+
+    public ParseGeoPoint getLocation() {
+        return getParseGeoPoint(KEY_LOCATION_COLUMN);
     }
 
     public Bitmap getBitmap() {
@@ -219,20 +220,12 @@ public class UserPojo extends ParseObject implements Parcelable, Comparable<User
         put(KEY_EMAIL_COLUMN, email);
     }
 
-//    public void setBirthday(String birthday) {
-//        put(KEY_BIRTHDAY_COLUMN, birthday);
-//    }
-
     public void setAbout(String about) {
         put(KEY_ABOUT_COLUMN, about);
     }
 
     public void setGender(String gender) {
         put(KEY_GENDER_COLUMN, gender);
-    }
-
-    public void setAge(int age) {
-        put(KEY_AGE_COLUMN, age);
     }
 
     public void setAge(String age) {
@@ -247,6 +240,10 @@ public class UserPojo extends ParseObject implements Parcelable, Comparable<User
 
     public void setCreated(long created) {
         put(KEY_CREATED_COLUMN, created);
+    }
+
+    public void setLocation(ParseGeoPoint parseGeoPoint) {
+        put(KEY_LOCATION_COLUMN, parseGeoPoint);
     }
 
     public void setPictureFile(ParseFile pictureFile){

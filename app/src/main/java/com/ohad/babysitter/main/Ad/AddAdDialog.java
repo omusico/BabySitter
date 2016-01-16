@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.ohad.babysitter.R;
 import com.ohad.babysitter.base.dialog.DialogBase;
 import com.ohad.babysitter.pojo.UserPojo;
-import com.ohad.babysitter.utility.GenderPicker;
+import com.ohad.babysitter.model.pickers.GenderPicker;
 import com.ohad.babysitter.utility.RealPathUtil;
 import com.ohad.babysitter.utility.Utility;
 import com.parse.ParseFile;
@@ -143,6 +143,7 @@ public class AddAdDialog extends DialogBase implements View.OnClickListener {
             userPojo.setGender(mGender);
             userPojo.setUserId(ParseUser.getCurrentUser().getObjectId());
             userPojo.setPictureFile(mImageParseFile);
+            Utility.setGeoPointToUserPojo(userPojo);
             mCallback.onAddUserCallbackResult(userPojo);
             dismiss();
         }

@@ -1,4 +1,4 @@
-package com.ohad.babysitter.utility;
+package com.ohad.babysitter.parse;
 
 import com.ohad.babysitter.pojo.UserPojo;
 import com.parse.GetCallback;

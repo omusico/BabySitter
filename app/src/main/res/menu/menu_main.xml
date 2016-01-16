@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".main.MainActivity">
 
-    <group android:id="@+id/action_more"
+    <!--<group android:id="@+id/action_more"
         android:title="@string/action_settings"
         android:icon="@drawable/ic_more_vert_white_24dp"
         android:orderInCategory="10"
@@ -19,11 +19,18 @@
             android:orderInCategory="10"
             app:showAsAction="never"/>
 
-    </group>
+    </group>-->
 
     <item android:id="@+id/action_add"
         android:title="@string/gen_add"
         android:icon="@drawable/ic_add_white_24dp"
         android:orderInCategory="1"
         app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_more"
+        android:title="@string/action_settings"
+        android:icon="@drawable/ic_more_vert_white_24dp"
+        android:orderInCategory="1"
+        app:showAsAction="ifRoom"/>
+
 </menu>

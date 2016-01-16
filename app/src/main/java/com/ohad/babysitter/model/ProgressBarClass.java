@@ -1,4 +1,4 @@
-package com.ohad.babysitter.utility;
+package com.ohad.babysitter.model;
 
 import android.app.ProgressDialog;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.ohad.babysitter.utility;
+package com.ohad.babysitter.parse;
 
 import android.app.Activity;
 import android.content.Context;

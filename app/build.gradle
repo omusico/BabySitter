@@ -49,4 +49,6 @@ dependencies {
     // TODO: Bus Libs
     compile 'com.squareup:otto:1.3.8'
     compile 'de.greenrobot:eventbus:2.4.0'
+    // TODO: Context Menu
+    compile 'com.yalantis:contextmenu:1.0.5'
 }

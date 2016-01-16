@@ -8,8 +8,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.ohad.babysitter.R;
+import com.ohad.babysitter.utility.LocationManagerSingleton;
 import com.ohad.babysitter.utility.Utility;
-import com.parse.ParseAnonymousUtils;
 import com.parse.ParseUser;
 
 /**
@@ -29,13 +29,16 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.splash);
 
+        // get geo point
+        LocationManagerSingleton.getInstance().findLocation();
+
         ParseUser currentUser = ParseUser.getCurrentUser();
 
-        if (currentUser != null) {
+        if (currentUser != null) { // if there is a user go to MainActivity.
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             SplashActivity.this.startActivity(intent);
             finish();
-        } else {
+        } else { // show splash screen and start login process.
             IntentLauncher launcher = new IntentLauncher();
             launcher.start();
         }

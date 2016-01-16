@@ -3,6 +3,8 @@
     <!--TODO: Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
     <!--TODO: Margin/Padding-->
     <dimen name="margin_baseX05">3dp</dimen>
@@ -39,7 +41,7 @@
     <dimen name="circular_images_size">50dp</dimen>
     <dimen name="add_image_size">80dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
+    <dimen name="main_menu_item_size">70dp</dimen>
+
 
 </resources>

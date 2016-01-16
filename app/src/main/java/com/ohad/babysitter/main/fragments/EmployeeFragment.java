@@ -10,24 +10,25 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.ohad.babysitter.main.Ad.AdAdapter;
 import com.ohad.babysitter.R;
 import com.ohad.babysitter.base.ApplicationBase;
+import com.ohad.babysitter.main.Ad.AdAdapter;
 import com.ohad.babysitter.main.MainActivityBus;
 import com.ohad.babysitter.main.MainActivityInterface;
+import com.ohad.babysitter.parse.ParseErrorHandler;
 import com.ohad.babysitter.pojo.UserPojo;
 import com.ohad.babysitter.utility.Constant;
-import com.ohad.babysitter.utility.ParseErrorHandler;
+import com.ohad.babysitter.utility.LocationManagerSingleton;
 import com.ohad.babysitter.utility.Utility;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -68,6 +69,17 @@ public class EmployeeFragment extends FragmentMain implements SwipeRefreshLayout
     private void refresh() {
         mSwipe.setRefreshing(true);
         ParseQuery<ParseObject> query = ParseQuery.getQuery(UserPojo.KEY_CLASS_NAME);
+
+        final ParseGeoPoint currentGeoPoint = LocationManagerSingleton.getInstance().getParseGeoPoint();
+        final int distanceKm = LocationManagerSingleton.getInstance().getDistanceKm();
+
+        if (currentGeoPoint != null) {
+            query.whereWithinKilometers(UserPojo.KEY_LOCATION_COLUMN, currentGeoPoint, distanceKm);
+        } else {
+            Toast.makeText(getActivity(), R.string.notify_location_wasnt_found, Toast.LENGTH_LONG).show();
+        }
+
+        query.orderByDescending(UserPojo.KEY_CREATED_COLUMN);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
@@ -80,8 +92,6 @@ public class EmployeeFragment extends FragmentMain implements SwipeRefreshLayout
                         mUsers.add(userPojo);
                     }
 
-                    Collections.reverse(mUsers);
-                    //Collections.sort(mUsers);
                     mAdapter.notifyDataSetChanged();
                 } else { // Query failed
                     ParseErrorHandler.handleParseError(getActivity(), e);

@@ -71,6 +71,9 @@
     <string name="add_ad_invalid_phone">You must enter phone!</string>
     <string name="add_ad_title">Post Something</string>
     <string name="error_cant_create_ad">Cannot create ad. Reason:\n</string>
+    <string name="error_fine_location_denied">You did not accepted the ACCESS_FINE_LOCATION permission</string>
+    <string name="notify_location_wasnt_found">Your location was not found yet! \nWait a few seconds and refresh to see near results.</string>
+    <string name="action_filter">Filter</string>
 
 
 </resources>

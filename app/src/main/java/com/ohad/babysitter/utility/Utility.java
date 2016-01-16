@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -13,6 +14,7 @@ import com.ohad.babysitter.pojo.UserPojo;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
@@ -150,6 +152,15 @@ public class Utility {
         return new ParseFile("baby_sitter_" + name + ".png", image);
     }
 
+    public static void setGeoPointToUserPojo(UserPojo userPojo) {
+        final Location location = LocationManagerSingleton.getInstance().getLatestLocation();
+        if (location == null) {
+            return;
+        }
+
+        final ParseGeoPoint geoPoint = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+        userPojo.setLocation(geoPoint);
+    }
 
 }
 

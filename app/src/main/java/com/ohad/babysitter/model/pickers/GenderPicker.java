@@ -1,4 +1,4 @@
-package com.ohad.babysitter.utility;
+package com.ohad.babysitter.model.pickers;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
